@@ -1,8 +1,10 @@
 
 
 import 'package:flutter/material.dart';
-  import 'package:ios_flutter/sub_page/countPage.dart';
- import 'package:ios_flutter/sub_page/imagePage.dart';
+import 'package:ios_flutter/sub_page/countPage.dart';
+import 'package:ios_flutter/sub_page/imagePage.dart';
+import 'package:ios_flutter/sub_page/containerPage.dart';
+import 'package:ios_flutter/sub_page/flexPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +29,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('功能展示')),
+      appBar: AppBar(title: const Text('功能展示'),backgroundColor: Colors.red,),
       body:Center(
         child: Column( 
           // mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +71,32 @@ class HomePage extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
           const Text('按鈕計數'),
+          ],),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const ContainerPage()),
+            );
+          },
+          child:Column( 
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+          const Text('Container Page'),
+          ],),
+        ),
+          ElevatedButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const FlexPage()),
+            );
+          },
+          child:Column( 
+          // mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+          const Text('Flex Page'),
           ],),
         ),
           ]
