@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ios_flutter/Home/home.dart';
+import 'package:ios_flutter/home/home.dart';
 import 'package:ios_flutter/sub_page/count_page.dart';
 import 'package:ios_flutter/sub_page/image_page.dart';
 import 'package:ios_flutter/sub_page/container_page.dart';
