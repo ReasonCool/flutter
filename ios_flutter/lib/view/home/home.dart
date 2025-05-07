@@ -1,16 +1,15 @@
+  /**
+   * 首頁畫面
+   * 
+   * 
+   */
+
+
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/home/app_context.dart';
 
-
- 
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key}); 
- 
-
-  @override
-  Widget build(BuildContext context) {
-  Widget _buildElevateButton(BuildContext context,MapEntry<String,Map<String,String>> entry){
+//子功能：建立按鈕與開啟頁面功能
+Widget _buildElevateButton(BuildContext context,MapEntry<String,Map<String,String>> entry){
      final String routePath = entry.key;
      final Map<String,String> buttonText = entry.value;
      final String titleStr;
@@ -57,7 +56,8 @@ class HomePage extends StatelessWidget {
     ); 
   } 
 
-  Widget _buildGridLayout(BuildContext context){
+//子功能：建立Grid Layout
+Widget _buildGridLayout(BuildContext context){
     final screenWidth = MediaQuery.of(context).size.width;
     final crossAxisCount = screenWidth > 300 ? 3 : 2; // 自适应列数
 
@@ -74,8 +74,9 @@ class HomePage extends StatelessWidget {
         return _buildElevateButton(context, entry);
       }), );
     }
-    
-  Widget _buildBackground(){
+
+//子功能：建立底圖  
+Widget _buildBackground(){
     return Positioned.fill(child:  Image(
                 image: AssetImage("resource/images/cat.png"),
                 fit: BoxFit.cover,
@@ -83,7 +84,8 @@ class HomePage extends StatelessWidget {
               ),);
   }
 
-  Widget _buildAddBgImage(BuildContext context){
+//子功能：建立主畫面
+Widget _buildAddBgImage(BuildContext context){
     return Stack(
       children: [
         _buildBackground(),
@@ -93,13 +95,20 @@ class HomePage extends StatelessWidget {
   }
 
 
-  return Scaffold(
-    appBar: AppBar(title: const Text('功能展示'),backgroundColor: Colors.red,),
-     extendBodyBehindAppBar: true, // 允许内容延伸到AppBar下方
-    body: _buildAddBgImage(context)
-        
-  ); 
-}
+//主畫面
+class HomePage extends StatelessWidget {
+  const HomePage({super.key}); 
+ 
+
+  @override
+  Widget build(BuildContext context) {
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('功能展示'),backgroundColor: Colors.red,),
+      extendBodyBehindAppBar: true, // 允许内容延伸到AppBar下方
+      body: _buildAddBgImage(context)    
+    );  
+  }
 }
    // List<Widget> buttons = AppRoutes.rountNames.entries.map((entry){
     

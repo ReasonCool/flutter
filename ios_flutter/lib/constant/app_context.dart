@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/home/home.dart';
-import 'package:ios_flutter/sub_page/count_page.dart';
-import 'package:ios_flutter/sub_page/image_page.dart';
-import 'package:ios_flutter/sub_page/container_page.dart';
-import 'package:ios_flutter/sub_page/flex_page.dart';
-import 'package:ios_flutter/sub_page/list_page.dart';
-import 'package:ios_flutter/sub_page/state_lift_cycle.dart';
-import 'package:ios_flutter/sub_page/scaffold_message.dart';
-import 'package:ios_flutter/sub_page/stack_page.dart';
-import 'package:ios_flutter/sub_page/gusture_detector.dart';
-import 'package:ios_flutter/sub_page/child_change_state_page.dart';
-import 'package:ios_flutter/sub_page/navi_transfor_data.dart';
-import 'package:ios_flutter/sub_page/navi_transfor_data_stateful.dart';
+import 'package:ios_flutter/view/sub_page/count_page.dart';
+import 'package:ios_flutter/view/sub_page/image_page.dart';
+import 'package:ios_flutter/view/sub_page/container_page.dart';
+import 'package:ios_flutter/view/sub_page/flex_page.dart';
+import 'package:ios_flutter/view/sub_page/list_page.dart';
+import 'package:ios_flutter/view/sub_page/state_lift_cycle.dart';
+import 'package:ios_flutter/view/sub_page/scaffold_message.dart';
+import 'package:ios_flutter/view/sub_page/stack_page.dart';
+import 'package:ios_flutter/view/sub_page/gusture_detector.dart';
+import 'package:ios_flutter/view/sub_page/child_change_state_page.dart';
+import 'package:ios_flutter/view/sub_page/navi_transfor_data.dart';
+import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
 
-
+/// 路由配置表
+/// ----------------------------
+ 
 enum AppRoutes {
   homeName('/HomeName'),
   imageTestName('/ImageTestName'),
