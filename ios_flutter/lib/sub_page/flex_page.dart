@@ -15,7 +15,15 @@ class FlexPage extends StatelessWidget {
           
       children: [
          Padding(padding: 
-        const EdgeInsets.only(top: 2,left: 20)),
+        const EdgeInsets.only(top: 2,left: 20),
+        child: Container(
+          color: Colors.red,
+          height: 100,
+        )
+
+          
+        ),
+        
         Flex(
           direction: Axis.horizontal,
           children: [
