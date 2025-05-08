@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+
 
 class ResetButton extends StatelessWidget {
   const ResetButton({super.key});
@@ -87,11 +87,7 @@ class _CounterPageState extends State<CounterPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(
-                              CupertinoIcons.heart_fill,
-                              color: Colors.pink,
-                              size: 30.0,
-                         ),
+                         
                           const Text(
                             'You have pushed the button this many times:',
                           ),

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/constant/app_context.dart';
 
+//檢測頁面狀態
 class MyNavigatorObserver extends NavigatorObserver {
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
@@ -31,6 +32,7 @@ class MyNavigatorObserver extends NavigatorObserver {
 
 
 void main() {
+
   runApp(const MyApp());
 }
 

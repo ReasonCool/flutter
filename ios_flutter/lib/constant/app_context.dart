@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/text_page.dart'; 
+import 'package:ios_flutter/view/sub_page/switch_check_page.dart'; 
+import 'package:ios_flutter/view/sub_page/button_page.dart'; 
+import 'package:ios_flutter/view/sub_page/icon_page.dart'; 
 import 'package:ios_flutter/view/sub_page/count_page.dart';
 import 'package:ios_flutter/view/sub_page/image_page.dart';
 import 'package:ios_flutter/view/sub_page/container_page.dart';
@@ -18,6 +22,10 @@ import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  textPageName('/TextPageName'),
+  switchCheckPageName('/SwitchCheckPageName'),
+  iconPageName('/IconPageName'),
+  buttonPageName('/ButtonPageName'),
   imageTestName('/ImageTestName'),
   stateLiftCycleName('/StateLiftCycleName'),
   counterPageName('/CounterPageName'),
@@ -38,6 +46,10 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  textPageName.path: (_) => const TextPage(),
+  switchCheckPageName.path: (_) =>  SwitchCheckPage(),
+  iconPageName.path: (_) => const IconPage(),
+  buttonPageName.path: (_) => const ButtonPage(),
   imageTestName.path: (_) => const ImagePage(),
   stateLiftCycleName.path : (_) => const StateLifecycleTest(),
   counterPageName.path : (_) =>  const CounterPage(),
@@ -57,6 +69,10 @@ enum AppRoutes {
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
     imageTestName.path: {"title":"本地與遠端圖片"} ,
+    textPageName.path : {"title":"Text"},
+    switchCheckPageName.path : {"title":"SwitchCheckBox"},
+    iconPageName.path : {"title":"Icon"},
+    buttonPageName.path : {"title":"Button"},
     stateLiftCycleName.path : {"title":"狀態生命週期"},
     counterPageName.path : {"title":"狀態變化：計數展示"},
     containerPageName.path : {"title":"容器 container "},

@@ -13,6 +13,7 @@ class ImagePage extends StatelessWidget {
         child: Column( 
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            
             Text(
               '本地圖片 ', 
               ), 
