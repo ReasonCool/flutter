@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ios_flutter/home/home.dart';
+import 'package:ios_flutter/view/home/home.dart';
 import 'package:ios_flutter/view/sub_page/count_page.dart';
 import 'package:ios_flutter/view/sub_page/image_page.dart';
 import 'package:ios_flutter/view/sub_page/container_page.dart';
@@ -29,7 +29,7 @@ enum AppRoutes {
   gustureDetectorName('/GustureDetectorName'),
   switchStateName('/SwitchStateName'),
   navigatorTransforDataName('/NavigatorTransforDataName'),
- navigatorTransforDataStatefulName('/NavigatorTransforDataStatefulName');
+  navigatorTransforDataStatefulName('/NavigatorTransforDataStatefulName');
 
   final String path;
   const AppRoutes(this.path);
