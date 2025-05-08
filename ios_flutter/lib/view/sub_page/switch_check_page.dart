@@ -56,6 +56,20 @@ class _SwitchCheckPageState extends State<SwitchCheckPage>{
       });
     }
 
+    List<Widget> switchWidgets = switchValue.asMap().entries.map((entry){
+          final index = entry.key;
+          final task = entry.value;
+          return TaskSwitchItem(checkData: task, onChanged:(newValue) => onSwitchChangeed(index ,newValue));
+           
+        }).toList();
+
+    List<Widget> checkboxWidgets = checkValue.asMap().entries.map((entry){
+          final index = entry.key;
+          final task = entry.value;
+          return TaskCheckItem(checkData: task, onChanged:() => onCheckBoxChangeed(index ));
+           
+        }).toList();
+
     String markStr = """
       .支援傳入switch 和 checkbox 的資料
       .StatefulWidget:使用list <CheckData>  switch 和 checkbox  
@@ -64,23 +78,12 @@ class _SwitchCheckPageState extends State<SwitchCheckPage>{
     """;
     return Scaffold(
       appBar: AppBar(title: Text("Switch and Checkbox"),),
-      body:Center(child: Column(children: [ Text(markStr),Text("Switch "),
-        ...switchValue.asMap().entries.map((entry){
-          final index = entry.key;
-          final task = entry.value;
-          return TaskSwitchItem(checkData: task, onChanged:(newValue) => onSwitchChangeed(index ,newValue));
-           
-        }).toList(),
+      body:Center(child: Column(children: [ 
+        Text(markStr),
+        Text("Switch "),
+        ...switchWidgets,
         Text("CheckBox"),
-        
-        ...checkValue.asMap().entries.map((entry){
-          final index = entry.key;
-          final task = entry.value;
-          return TaskCheckItem(checkData: task, onChanged:() => onCheckBoxChangeed(index ));
-           
-        }).toList(),
-       
-
+        ...checkboxWidgets ,
       ],
       ),
       ),
