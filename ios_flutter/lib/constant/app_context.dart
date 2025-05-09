@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
 import 'package:ios_flutter/view/sub_page/text_page.dart'; 
-import 'package:ios_flutter/view/sub_page/textfield_page.dart'; 
+import 'package:ios_flutter/view/sub_page/textField/textfield_page.dart'; 
 import 'package:ios_flutter/view/sub_page/switch_check_page.dart'; 
 import 'package:ios_flutter/view/sub_page/button_page.dart'; 
 import 'package:ios_flutter/view/sub_page/icon_page.dart'; 
