@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/data_class.dart';
-import 'package:ios_flutter/view/sub_page/textField/textfield_model.dart';
-import 'package:ios_flutter/view/sub_page/textFromField/textFromField_model.dart';
+import 'package:ios_flutter/model/textfield_model.dart';
+import 'package:ios_flutter/model/textFromField_model.dart';
 class FormPage extends StatefulWidget{
   
 
