@@ -11,32 +11,35 @@ class DecoratedBoxPage extends StatelessWidget{
       body:Column(
           children: [
                     DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(30),
-                gradient: LinearGradient(
-                  colors: [Colors.blue!, Colors.blue!],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.blue.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(30),
-                  onTap: () {},
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    child: Text('PRESS ME', style: TextStyle(color: Colors.white)),
-                  ),
-                ),
-              ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(18),
+                        gradient: LinearGradient(
+                          colors: [Colors.blue, Colors.yellow],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.red,
+                            spreadRadius: 1,
+                            blurRadius: 2,
+                          ),
+                        ],
+                      ),
+                      position: DecorationPosition.background,
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(8),
+                            onTap: () {
+
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                              child: Text('PRESS ME', style: TextStyle(color: Colors.white)),
+                            ),
+                          ),
+                        ),
             ),
            DecoratedBox(
               decoration: BoxDecoration(color: Colors.red),
