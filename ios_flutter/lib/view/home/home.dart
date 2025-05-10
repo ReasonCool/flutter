@@ -59,6 +59,9 @@ Widget _buildElevateButton(BuildContext context,MapEntry<String,Map<String,Strin
 //子功能：建立Grid Layout
 Widget _buildGridLayout(BuildContext context){
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight= MediaQuery.of(context).size.height;
+    print("screenWidth:$screenWidth");
+    print("screenHeight:$screenHeight");
     final crossAxisCount = screenWidth > 300 ? 3 : 2; // 自适应列数
 
     return Padding(padding: EdgeInsets.all(12),
@@ -105,9 +108,24 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(title: const Text('功能展示'),backgroundColor: Colors.red,),
-      extendBodyBehindAppBar: true, // 允许内容延伸到AppBar下方
-      body: _buildAddBgImage(context)    
-    );  
+     //extendBodyBehindAppBar: true, // 允许内容延伸到AppBar下方
+      body:Center(child: 
+       Flex(
+          direction: Axis.vertical,
+          children: [
+            Expanded(
+              flex: 0,
+              child:  Text("取得目前裝置寬度 screenWidth = MediaQuery.of(context).size.width;"),
+            ),
+            Expanded(
+              flex: 1,
+              child:_buildAddBgImage(context),
+            ),
+          ],
+        ),
+       )   
+      );
+   
   }
 }
    // List<Widget> buttons = AppRoutes.rountNames.entries.map((entry){
