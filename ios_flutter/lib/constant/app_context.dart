@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/layout_build_page.dart';
+import 'package:ios_flutter/view/sub_page/align_page.dart';
+import 'package:ios_flutter/view/sub_page/decorated_box_page.dart';
+import 'package:ios_flutter/view/sub_page/progress_Indicator_page.dart';
 import 'package:ios_flutter/view/sub_page/text_page.dart'; 
 import 'package:ios_flutter/view/sub_page/textFromField/form_page.dart';
 import 'package:ios_flutter/view/sub_page/textField/textfield_page.dart'; 
@@ -24,6 +28,10 @@ import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  layoutBuildPageName('/LayoutBuildPageName'),
+  decoratedBoxPageName('/DecoratedBoxPageName'),
+  alignPageName('/AlignPageName'),
+  progressIndicatorName('/ProgressIndicatorName'),
   textPageName('/TextPageName'),
   textFieldPageName('/TextFieldPageName'),
   formPageName('/FormPageName'),
@@ -50,6 +58,10 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  layoutBuildPageName.path: (_) => const LayoutBuildPage(),
+  decoratedBoxPageName.path:(_)=>const DecoratedBoxPage(),
+  alignPageName.path: (_) => const AlignPage(),
+  progressIndicatorName.path: (_) => const ProgressIndicatorPage(),
   textPageName.path: (_) => const TextPage(),
   formPageName.path:(_) => const FormPage(),
   textFieldPageName.path: (_) => const TextFieldPage(),
@@ -74,6 +86,10 @@ enum AppRoutes {
 
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
+    layoutBuildPageName.path:{'title':'Layout Build Page 取得設備尺寸 '},
+    decoratedBoxPageName.path:{'title':'DecoratedBox '},
+    alignPageName.path: {"title":"align定位"},
+    progressIndicatorName.path: {"title":"進度與等待"},
     imageTestName.path: {"title":"本地與遠端圖片"} ,
     textPageName.path : {"title":"Text"},
      textFieldPageName.path : {"title":"TextField"},
