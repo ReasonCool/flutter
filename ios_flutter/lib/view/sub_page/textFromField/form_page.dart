@@ -1,17 +1,18 @@
-
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/data_class.dart';
 import 'package:ios_flutter/view/sub_page/textField/textfield_model.dart';
+import 'package:ios_flutter/view/sub_page/textFromField/textFromField_model.dart';
+class FormPage extends StatefulWidget{
+  
 
-class TextFieldPage extends StatefulWidget{
-  const TextFieldPage ({Key? key}) : super(key:key);
-
+  const FormPage ({Key? key}):super(key:key);
   @override
-  State<TextFieldPage> createState() => _TextFieldPageState();
+  State<FormPage> createState() => _FormPageState(); 
 }
-class _TextFieldPageState extends State<TextFieldPage>{
+class _FormPageState extends State<FormPage>{
 
- 
+  final _formKey =  GlobalKey<FormState>();
+
   late List<TextFieldData> textDatas ;
 
   @override
@@ -24,12 +25,12 @@ class _TextFieldPageState extends State<TextFieldPage>{
 
   @override
   Widget build(BuildContext context){
-    print("build");
+
       TextFieldOnChanged(value,index){
-        setState(() {
+       setState(() {
             bool isVerify = RegExp(textDatas[index].regexpSource).hasMatch(value);
             textDatas[index].text = value;
-            print("TextFieldOnSubmitted value:$value index:$index isVerify:$isVerify");
+            print("TextFieldOnChanged990 value:$value index:$index isVerify:$isVerify");
             textDatas[index].verifyPass = isVerify;
         });
       }
@@ -50,28 +51,21 @@ class _TextFieldPageState extends State<TextFieldPage>{
  
       };
 
-     List<Widget>  textFields = createTextFields(textDatas,
-                                                  TextFieldOnChanged,
-                                                  TextFieldOnEditingComplete,
-                                                  TextFieldOnSubmitted);
+      List<Widget> textFieldList = createTextFormFields(textDatas, TextFieldOnChanged, TextFieldOnEditingComplete, TextFieldOnSubmitted);
 
-  
     return Scaffold(
-      appBar: AppBar(title: Text("TextField"),),
-      body: Center(child:Column(
-        children: <Widget>[
-          ...textFields
-         ,
-          ElevatedButton(onPressed: (){
+      appBar: AppBar(title: Text("Form Page"),),
+      body:Form(key:_formKey,child: Column(children: [
+        ...textFieldList,ElevatedButton(onPressed: (){
             //檢查
-
-            if(checkTextDatas(TextFieldOnChanged,textDatas) == false) return;
-            checkSend(sendDataDo,context);
+            if((_formKey.currentState as FormState).validate()){
+              checkSend(sendDataDo,context);
+            }
+            
 
           }
           , child: Text("驗證並儲存"))
-        ],
-      ),),
+      ],),) ,
     );
   }
 }

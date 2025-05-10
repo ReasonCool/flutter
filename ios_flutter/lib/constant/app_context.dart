@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
 import 'package:ios_flutter/view/sub_page/text_page.dart'; 
+import 'package:ios_flutter/view/sub_page/textFromField/form_page.dart';
 import 'package:ios_flutter/view/sub_page/textField/textfield_page.dart'; 
 import 'package:ios_flutter/view/sub_page/switch_check_page.dart'; 
 import 'package:ios_flutter/view/sub_page/button_page.dart'; 
@@ -25,6 +26,7 @@ enum AppRoutes {
   homeName('/HomeName'),
   textPageName('/TextPageName'),
   textFieldPageName('/TextFieldPageName'),
+  formPageName('/FormPageName'),
   switchCheckPageName('/SwitchCheckPageName'),
   iconPageName('/IconPageName'),
   buttonPageName('/ButtonPageName'),
@@ -49,6 +51,7 @@ enum AppRoutes {
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
   textPageName.path: (_) => const TextPage(),
+  formPageName.path:(_) => const FormPage(),
   textFieldPageName.path: (_) => const TextFieldPage(),
   switchCheckPageName.path: (_) =>  SwitchCheckPage(),
   iconPageName.path: (_) => const IconPage(),
@@ -74,6 +77,7 @@ enum AppRoutes {
     imageTestName.path: {"title":"本地與遠端圖片"} ,
     textPageName.path : {"title":"Text"},
      textFieldPageName.path : {"title":"TextField"},
+     formPageName.path: {"title":"FormPage"},
     switchCheckPageName.path : {"title":"SwitchCheckBox"},
     iconPageName.path : {"title":"Icon"},
     buttonPageName.path : {"title":"Button"},

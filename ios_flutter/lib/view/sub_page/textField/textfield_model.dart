@@ -1,34 +1,7 @@
 
 import 'package:flutter/material.dart';
-class TextFieldData{
-  String text ;
-  String labelText;
-  String hintText;
-  Widget prefixIcon;
-  String errorText;
-  TextInputType keyboardType;
-  TextEditingController controller  = TextEditingController();
-  bool obscureText ;
-  bool verifyPass;
-  FocusNode focusNode = FocusNode();
-  String regexpSource;
-  TextFieldData({required this.text,required this.labelText,required this.hintText,
-  required this.prefixIcon,this.verifyPass = true ,this.regexpSource = '', this.errorText = "",this.keyboardType = TextInputType.text,this.obscureText = false});
-
-  static List<TextFieldData> get TestData =>  [
-      TextFieldData( text: "" , labelText: '用戶名', hintText: '用戶名', prefixIcon:Icon(Icons.person)  
-          ,errorText: "請輸入至少3-6個字母",regexpSource: r'^[a-zA-Z0-9]{3,6}$'),
-      TextFieldData( text: "" , labelText: '電子郵件', hintText: 'xxx@xxx.xxx', 
-      prefixIcon:Icon(Icons.person)   ,errorText: "不符合格式",regexpSource:r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$' ),
-      TextFieldData( text: "" , labelText: '行動電話', hintText: '09xx-xxx-xxx', prefixIcon:Icon(Icons.person)
-       ,errorText: "不符合格式",regexpSource: r'^09\d{2}-?\d{3}-?\d{3}$'),
-      TextFieldData( text: "" , labelText: '密碼', hintText: '英數六碼', prefixIcon:Icon(Icons.person)  
-      ,errorText: "不符合格式",regexpSource: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$'),
-
-      ];
-    
-
-}
+import 'package:ios_flutter/interface/typedef_funtion.dart';
+import 'package:ios_flutter/interface/data_class.dart';
 
 
 enum LoginDataType {
@@ -41,7 +14,8 @@ final String loginType;
 const LoginDataType(this.loginType);
 }
 
-typedef BuildContextCallback = void Function(BuildContext context);
+
+
 checkSend(BuildContextCallback sendDataDo1,BuildContext context){
  //
   //嵌套詢問
@@ -81,7 +55,7 @@ checkSend(BuildContextCallback sendDataDo1,BuildContext context){
       }
     });
   }
-typedef TextFieldCallback = void Function(String text, int index);
+
   bool checkTextDatas(TextFieldCallback TextFieldOnChanged,List<TextFieldData> textDatas) {
       //確認驗證都通過 
       bool verifyPass = true;
@@ -117,3 +91,61 @@ typedef TextFieldCallback = void Function(String text, int index);
             } 
     }
   
+
+
+ List<Widget>  createTextFields(List<TextFieldData> textDatas,
+                                TextFieldCallback  TextFieldOnChanged,
+                                IndexCallback TextFieldOnEditingComplete,
+                                TextFieldCallback TextFieldOnSubmitted)
+                                {
+     
+    List<Widget> textFieldList =  textDatas.asMap().entries.map((entry) {
+
+        final index = entry.key;
+        final value = entry.value;
+        final TextInputAction textInputAction;
+        final bool autoFocus;
+
+        if (index == textDatas.length - 1){
+          textInputAction = TextInputAction.done;
+          autoFocus = false;
+        }else{
+           textInputAction = TextInputAction.next;
+           autoFocus = true;
+        }
+
+       return TextField(
+            keyboardType: value.keyboardType,
+            textInputAction: textInputAction,
+            focusNode: value.focusNode,
+            autofocus: autoFocus,
+            onChanged: (value) {
+              print("textfield1 value:$value");
+              TextFieldOnChanged(value, index);
+
+            },
+            controller: value.controller,
+            decoration: InputDecoration(
+              labelText: value.labelText,
+              hintText: value.hintText,
+              prefixIcon: value.prefixIcon,
+              errorText: value.verifyPass ? null : value.errorText,
+      
+            ),
+            obscureText: value.obscureText,
+            onEditingComplete: () {
+              
+                TextFieldOnEditingComplete(index);
+
+                //focusScopeNode.requestFocus(textfield1Focus);
+            },
+            onSubmitted: (value) {
+               TextFieldOnSubmitted(value, index);
+            },
+          );
+      }).toList();
+
+      return textFieldList;
+    }
+
+
