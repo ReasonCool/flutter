@@ -115,8 +115,10 @@ class HomePage extends StatelessWidget {
           children: [
             Expanded(
               flex: 0,
-              child:  Text("取得目前裝置寬度 screenWidth = MediaQuery.of(context).size.width;"),
-            ),
+            child:Text("取得目前裝置寬度 screenWidth = MediaQuery.of(context).size.width;")
+            ,),
+            
+            Divider(),
             Expanded(
               flex: 1,
               child:_buildAddBgImage(context),

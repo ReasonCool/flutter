@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/widgets_binding_page.dart';
 import 'package:ios_flutter/view/sub_page/layout_build_page.dart';
 import 'package:ios_flutter/view/sub_page/align_page.dart';
 import 'package:ios_flutter/view/sub_page/decorated_box_page.dart';
@@ -28,6 +29,7 @@ import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  widgetsBindingPage('/WidgetsBindingPage'),
   layoutBuildPageName('/LayoutBuildPageName'),
   decoratedBoxPageName('/DecoratedBoxPageName'),
   alignPageName('/AlignPageName'),
@@ -58,6 +60,7 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  widgetsBindingPage.path: (_) => const WidgetsBindingPage(),
   layoutBuildPageName.path: (_) => const LayoutBuildPage(),
   decoratedBoxPageName.path:(_)=>const DecoratedBoxPage(),
   alignPageName.path: (_) => const AlignPage(),
@@ -86,6 +89,7 @@ enum AppRoutes {
 
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
+    widgetsBindingPage.path:{'title':'Widget渲染後的尺寸與位置 '},
     layoutBuildPageName.path:{'title':'Layout Build Page 取得設備尺寸 '},
     decoratedBoxPageName.path:{'title':'DecoratedBox '},
     alignPageName.path: {"title":"align定位"},
