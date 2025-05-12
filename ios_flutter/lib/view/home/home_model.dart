@@ -94,6 +94,29 @@ Widget buildAddBgImage(BuildContext context){
     );
   }
 
+
 //class PopupMenuButton<T> extends StatefulWidget {
 
 
+createDialog(BuildContext context){
+   showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('操作確認'),
+        content: Text('確定要執行此操作嗎？'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text('取消'),
+          ),
+          TextButton(
+            onPressed: () {
+              print('已確認操作');
+              Navigator.pop(context);
+            },
+            child: Text('確定'),
+          ),
+        ],
+      ),
+    );
+}

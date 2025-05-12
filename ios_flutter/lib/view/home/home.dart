@@ -21,8 +21,20 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('功能展示'),backgroundColor: Colors.red,
       leading: homeLeftMenu(context),
        ),
+       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0 ,onTap: (index) {
+          createDialog(context);
+        },
+      type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.red,
+        items: [
+        BottomNavigationBarItem( icon:  Icon( Icons.functions,color: Colors.green), backgroundColor: Colors.black,label: '功能展示'),
+        BottomNavigationBarItem( icon:  Icon( Icons.add,color: Colors.green), backgroundColor: Colors.black,label: '增加'),
+        BottomNavigationBarItem( icon:  Icon( Icons.settings_backup_restore,color: Colors.green), backgroundColor: Colors.black,label: '註冊'),
+        ],),
        drawer: MyDrawer(),
        endDrawer: MyDrawer(),
+       floatingActionButton: FloatingActionButton(onPressed :() =>  createDialog(context)  ,child: Text("FloatingButton"),),
      //extendBodyBehindAppBar: true, // 允许内容延伸到AppBar下方
       body:Center(child: 
        Flex(

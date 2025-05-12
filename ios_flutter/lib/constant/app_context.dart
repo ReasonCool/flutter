@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/tap_page.dart';
 import 'package:ios_flutter/view/sub_page/dialog_page.dart';
 import 'package:ios_flutter/view/sub_page/email_login_page.dart';
 import 'package:ios_flutter/view/sub_page/fitted_box_page.dart';
@@ -34,6 +35,7 @@ import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  tapPageName('/TapPageName'),
   dialogPageName('/DialogPageName'),
   emailLoginPage('/EmailLoginPage'),
   clipPage('/ClipPage'),
@@ -70,6 +72,7 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  tapPageName.path:(_) => const TapPage(),
   dialogPageName.path : (_) => const DialogPage(),
   emailLoginPage.path: (_) => const EmailLoginPage(),
   fittedBoxPageName.path: (_) => const FittedBoxPage(),
@@ -106,6 +109,7 @@ enum AppRoutes {
     //homeName.path: "首頁",arg
     clipPage.path:{'title':'clip 剪裁 '},
     dialogPageName.path:{'title':'對話匡 '},
+    tapPageName.path:{'title':'Tab Page '},
     emailLoginPage.path : {'title':'Email Login '},
      fittedBoxPageName.path:{'title':'溢出空間調整 '},
     transformRotateBoxPage.path:{'title':'transform rotateBox 旋轉與平移 '},
