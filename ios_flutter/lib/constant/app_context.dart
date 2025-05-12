@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/dialog_page.dart';
+import 'package:ios_flutter/view/sub_page/email_login_page.dart';
+import 'package:ios_flutter/view/sub_page/fitted_box_page.dart';
 import 'package:ios_flutter/view/sub_page/clip_page.dart';
 import 'package:ios_flutter/view/sub_page/trasform_rotate_box_page.dart';
 import 'package:ios_flutter/view/sub_page/widgets_binding_page.dart';
@@ -31,7 +34,10 @@ import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  dialogPageName('/DialogPageName'),
+  emailLoginPage('/EmailLoginPage'),
   clipPage('/ClipPage'),
+  fittedBoxPageName('/FittedBoxPageName'),
   transformRotateBoxPage('/TransformRotateBoxPage'),
   widgetsBindingPage('/WidgetsBindingPage'),
   layoutBuildPageName('/LayoutBuildPageName'),
@@ -64,6 +70,9 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  dialogPageName.path : (_) => const DialogPage(),
+  emailLoginPage.path: (_) => const EmailLoginPage(),
+  fittedBoxPageName.path: (_) => const FittedBoxPage(),
   clipPage.path: (_) => const ClipPage(),
   transformRotateBoxPage.path: (_) => const TransformRotateBoxPage(),
   widgetsBindingPage.path: (_) => const WidgetsBindingPage(),
@@ -96,6 +105,9 @@ enum AppRoutes {
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
     clipPage.path:{'title':'clip 剪裁 '},
+    dialogPageName.path:{'title':'對話匡 '},
+    emailLoginPage.path : {'title':'Email Login '},
+     fittedBoxPageName.path:{'title':'溢出空間調整 '},
     transformRotateBoxPage.path:{'title':'transform rotateBox 旋轉與平移 '},
     widgetsBindingPage.path:{'title':'Widget渲染後的尺寸與位置 '},
     layoutBuildPageName.path:{'title':'Layout Build Page 取得設備尺寸 '},

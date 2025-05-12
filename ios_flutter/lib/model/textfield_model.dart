@@ -16,7 +16,7 @@ const LoginDataType(this.loginType);
 
 
 
-checkSend(BuildContextCallback sendDataDo1,BuildContext context){
+checkSend(VoidBuildContextCallback sendDataDo1,BuildContext context){
  //
   //嵌套詢問
   showDialog(
@@ -56,7 +56,7 @@ checkSend(BuildContextCallback sendDataDo1,BuildContext context){
     });
   }
 
-  bool checkTextDatas(TextFieldCallback TextFieldOnChanged,List<TextFieldData> textDatas) {
+  bool checkTextDatas(VoidTextFieldCallback TextFieldOnChanged,List<TextFieldData> textDatas) {
       //確認驗證都通過 
       bool verifyPass = true;
       int index = 0;
@@ -94,9 +94,9 @@ checkSend(BuildContextCallback sendDataDo1,BuildContext context){
 
 
  List<Widget>  createTextFields(List<TextFieldData> textDatas,
-                                TextFieldCallback  TextFieldOnChanged,
-                                IndexCallback TextFieldOnEditingComplete,
-                                TextFieldCallback TextFieldOnSubmitted)
+                                VoidTextFieldCallback  TextFieldOnChanged,
+                                VoidIndexCallback TextFieldOnEditingComplete,
+                                VoidTextFieldCallback TextFieldOnSubmitted)
                                 {
      
     List<Widget> textFieldList =  textDatas.asMap().entries.map((entry) {
