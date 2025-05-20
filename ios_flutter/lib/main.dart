@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/constant/app_context.dart';
+ 
+ 
+
 
 //檢測頁面狀態
 class MyNavigatorObserver extends NavigatorObserver {
@@ -32,8 +35,11 @@ class MyNavigatorObserver extends NavigatorObserver {
 
 
 void main() {
-
+  
   runApp(const MyApp());
+
+
+
 }
 
 // 动态路由生成器：路由名稱無對應資料會跑這個
@@ -48,6 +54,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
     return MaterialApp(
       title: 'Counter Demo',
       theme: ThemeData(primarySwatch: Colors.blue),
@@ -62,4 +70,4 @@ class MyApp extends StatelessWidget {
     
 
 
-
+ 

@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/notification_page.dart';
+import 'package:ios_flutter/view/sub_page/provider_page.dart';
+import 'package:ios_flutter/view/sub_page/provider_sdk_page.dart';
+import 'package:ios_flutter/view/sub_page/inherited_widget_page.dart';
+import 'package:ios_flutter/view/sub_page/flow_page.dart';
+import 'package:ios_flutter/view/sub_page/widgets_binding_page.dart';
 import 'package:ios_flutter/view/sub_page/tap_page.dart';
 import 'package:ios_flutter/view/sub_page/dialog_page.dart';
 import 'package:ios_flutter/view/sub_page/email_login_page.dart';
@@ -29,12 +35,19 @@ import 'package:ios_flutter/view/sub_page/gusture_detector.dart';
 import 'package:ios_flutter/view/sub_page/child_change_state_page.dart';
 import 'package:ios_flutter/view/sub_page/navi_transfor_data.dart';
 import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
+import 'package:ios_flutter/view/sub_page/wrap_page.dart';
 
 /// 路由配置表
 /// ----------------------------
  
 enum AppRoutes {
   homeName('/HomeName'),
+  notificationPageName('/NotificationPageName'),
+  inheritedWidgetPageName('/InheritedWidthPageName'),
+  providerPageName('/ProviderPageName'),
+  providerSDKPageName('/ProviderSDKPageName'),
+  flowPageName('/FlowPageName'),
+  wrapPageName('/WrapPageName'),
   tapPageName('/TapPageName'),
   dialogPageName('/DialogPageName'),
   emailLoginPage('/EmailLoginPage'),
@@ -72,6 +85,12 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  notificationPageName.path: (_) => NotificationPage(),
+  providerPageName.path: (_) => const ProviderPage(),
+  providerSDKPageName.path: (_) => const ProviderSdkPage(),
+  inheritedWidgetPageName.path: (_) => const InheritedWidgetPage(),
+  flowPageName.path:(_)=> const FlowPage(),
+  wrapPageName.path:(_)=> const WrapPage(),
   tapPageName.path:(_) => const TapPage(),
   dialogPageName.path : (_) => const DialogPage(),
   emailLoginPage.path: (_) => const EmailLoginPage(),
@@ -107,7 +126,13 @@ enum AppRoutes {
 
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
+    notificationPageName.path:{"title":"notification Page "},
+    providerPageName.path:{"title":"provider Page "},
+    providerSDKPageName.path:{"title":"provider sdk Page "},
+    inheritedWidgetPageName.path:{"title":"Inherited 簡單做"},
+    flowPageName.path:{"title":"Flow Page "},
     clipPage.path:{'title':'clip 剪裁 '},
+    wrapPageName.path:{'title':'Wrap Page'},
     dialogPageName.path:{'title':'對話匡 '},
     tapPageName.path:{'title':'Tab Page '},
     emailLoginPage.path : {'title':'Email Login '},

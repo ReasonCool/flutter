@@ -54,12 +54,28 @@ class ListPage extends StatelessWidget {
      
     
     // 需要 return ListView
-    return ListView(
-      children: [
-        const ListTile(title: Text("_buildList 1")), // 提升渲染效能
-        const ListTile(title: Text("_buildList 2")),
-      ],
-    );
+    return   NotificationListener<ScrollNotification>(
+            onNotification: (ScrollNotification notification) {
+              // 使用 is 关键字精确匹配类型
+              if (notification is ScrollStartNotification) {
+                debugPrint("开始滚动: ${notification.metrics}");
+              } else if (notification is ScrollUpdateNotification) {
+                debugPrint("滚动中: 偏移量 ${notification.dragDetails?.delta}"); 
+              } else if (notification is ScrollEndNotification) {
+                debugPrint("滚动停止: 最终位置 ${notification.metrics.pixels}");
+              } else if (notification is OverscrollNotification) {
+                debugPrint("滚动越界: 越界量 ${notification.overscroll}");
+              }
+              return false; // 允许通知继续向上传递
+            },
+              child: ListView.builder(
+                  itemCount: 100,
+                  itemBuilder: (context, index) {
+                    return ListTile(title: Text("$index"),);
+                  }   
+                ),
+              );
+
   }
   Widget _buildList1() {
     var items = ["items.map a", "items.map b", "items.map c"];
