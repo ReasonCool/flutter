@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/sub_page/remote_config_page.dart';
 import 'package:ios_flutter/view/sub_page/notification_page.dart';
 import 'package:ios_flutter/view/sub_page/provider_page.dart';
 import 'package:ios_flutter/view/sub_page/provider_sdk_page.dart';
@@ -42,6 +43,7 @@ import 'package:ios_flutter/view/sub_page/wrap_page.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  remoteConfigPageName('/RemoteConfigPageName'),
   notificationPageName('/NotificationPageName'),
   inheritedWidgetPageName('/InheritedWidthPageName'),
   providerPageName('/ProviderPageName'),
@@ -85,6 +87,7 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  remoteConfigPageName.path: (_) => const RemoteConfigPage(),
   notificationPageName.path: (_) => NotificationPage(),
   providerPageName.path: (_) => const ProviderPage(),
   providerSDKPageName.path: (_) => const ProviderSdkPage(),
@@ -126,6 +129,7 @@ enum AppRoutes {
 
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
+    remoteConfigPageName.path:{"title":"Romte Config Page "},
     notificationPageName.path:{"title":"notification Page "},
     providerPageName.path:{"title":"provider Page "},
     providerSDKPageName.path:{"title":"provider sdk Page "},

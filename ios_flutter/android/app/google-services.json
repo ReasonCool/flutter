@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "326127959271",
+    "project_id": "flutterreason",
+    "storage_bucket": "flutterreason.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326127959271:android:e1f3be35130a1d8564f642",
+        "android_client_info": {
+          "package_name": "com.example.ios_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtA25sZEspAPcdg72yyYauwSOM_PN6ThA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,10 +1,13 @@
 
 
+
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/constant/app_context.dart';
- 
- 
 
+ //firbase
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
+import 'firebase_options.dart'; 
 
 //檢測頁面狀態
 class MyNavigatorObserver extends NavigatorObserver {
@@ -34,8 +37,22 @@ class MyNavigatorObserver extends NavigatorObserver {
 }
 
 
-void main() {
-  
+void main() async {
+
+ WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  final remoteConfig = FirebaseRemoteConfig.instance;
+ 
+await remoteConfig.fetchAndActivate();
+
+remoteConfig.onConfigUpdated.listen((event) async {
+   await remoteConfig.activate();
+
+   // Use the new config values here.
+ });
+ 
   runApp(const MyApp());
 
 
