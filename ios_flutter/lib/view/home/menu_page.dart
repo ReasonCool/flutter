@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:ios_flutter/interface/typedef_funtion.dart';
+import 'package:ios_flutter/constant/app_context.dart';
  
- 
+ //provider
+import 'package:provider/provider.dart';
+import 'package:ios_flutter/model/loginInfo.dart';
+
+import 'package:ios_flutter/future/firebase_logout.dart';
+
 
 //左側功能 項目
  enum MenuItemName{
   login('Login'),
+  logout('Logout'),
   setting('Setting'),
   abouUs('About'),
   loginFB('LoginFB'),
@@ -18,11 +24,19 @@ import 'package:ios_flutter/interface/typedef_funtion.dart';
   final String itemName;
   const MenuItemName(this.itemName);
 
-  static  Map<String,Widget>get popItems => {
-    MenuItemName.login.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.login.itemName)],),) ,
+  static Map<String,Widget> popItems = { 
     MenuItemName.setting.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text("設定")],),) ,
     MenuItemName.abouUs.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.info ,color: Colors.green),Text("關於")],),) ,
       };
+
+
+  static  Map<String,Widget>get popItemsIsLogin => { 
+    MenuItemName.login.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.login.itemName)],),) ,
+    ...popItems      };
+
+    static  Map<String,Widget>get popItemsIsLogout => { 
+    MenuItemName.logout.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.logout.itemName)],),) ,
+   ...popItems       };
 
   static  Map<String,Widget>get popLoginItems => {
     MenuItemName.loginFB.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.facebook,color: Colors.green),Text("Facebook")],),) ,
@@ -45,17 +59,28 @@ import 'package:ios_flutter/interface/typedef_funtion.dart';
  } 
 
 PopupMenuButton<String> homeLeftMenu( BuildContext context ){
-  Map<String,Widget> popItems   = MenuItemName.popItems ;
+
+
+  Map<String,Widget> popItems  = context.watch<LoginModel>().isLogin ?  MenuItemName.popItemsIsLogout : MenuItemName.popItemsIsLogin;
   Map<String,Widget> popLoginItems   = MenuItemName.popLoginItems;
 
-  menuOnSelectedItem(itemName){
+  menuOnSelectedItem(itemName)  {
 
      print("menuOnSelectedItem $itemName");
-        
-    if(itemName == MenuItemName.loginFB.itemName){
-        Navigator.of(context).pushNamed('/EmailLoginPage');
+
+
+    if(itemName == MenuItemName.loginAuto.itemName){
+      Navigator.of(context).pushNamed(AppRoutes.autoLoginName.path );
+    }else if(itemName == MenuItemName.loginFB.itemName){
+        Navigator.of(context).pushNamed(AppRoutes.emailLoginPage.path );
+    }else  if(itemName == MenuItemName.logout.itemName){
+      /// TODO :改為登出狀態
+      //弹出对话框并等待其关闭 showLogout
+      showLogout(context);
+     
     }
-    };
+
+};
 
 
  final List<PopupMenuItem<String>> popLoginList = popLoginItems.entries.map((entry) => PopupMenuItem<String> (

@@ -1,13 +1,18 @@
 
 
-
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/constant/app_context.dart';
 
- //firbase
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
-import 'firebase_options.dart'; 
+//provider
+import 'package:provider/provider.dart';
+import 'package:ios_flutter/model/loginInfo.dart';
+
+ 
+
+
+ import 'package:ios_flutter/future/firebase_init.dart';
+
+
 
 //檢測頁面狀態
 class MyNavigatorObserver extends NavigatorObserver {
@@ -37,24 +42,21 @@ class MyNavigatorObserver extends NavigatorObserver {
 }
 
 
-void main() async {
-
- WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  final remoteConfig = FirebaseRemoteConfig.instance;
  
-await remoteConfig.fetchAndActivate();
+void main() {
 
-remoteConfig.onConfigUpdated.listen((event) async {
-   await remoteConfig.activate();
-
-   // Use the new config values here.
- });
+//firebaseInit();
  
-  runApp(const MyApp());
+runApp(  MultiProvider( // 正确使用 MultiProvider
+        providers: [
+          ChangeNotifierProvider(create: (_) => LoginModel()),
+          // 添加其他 Provider...
+        ],
+        child:const MyApp()
+      )
+    );
 
+//runApp(const MyApp());
 
 
 }
@@ -66,21 +68,57 @@ remoteConfig.onConfigUpdated.listen((event) async {
  
     
   // }
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState(); 
+}
+class _MyAppState extends State<MyApp>{
+late Future <Map<String, dynamic>> _firebase_Init;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _firebase_Init = firebaseInit();
+  }
 
   @override
   Widget build(BuildContext context) {
 
-    
-    return MaterialApp(
-      title: 'Counter Demo',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      //home: const HomePage(),
-      initialRoute: AppRoutes.homeName.path,
-      routes: AppRoutes.routes ,
-     // onGenerateInitialRoutes: (RouteSettings settings) => _generateRoute(settings),
-      navigatorObservers: [MyNavigatorObserver()],
+    return FutureBuilder<Map<String, dynamic>>(
+      future: _firebase_Init,
+      builder: (context, snapshot) {
+        // 顯示載入動畫
+        if (snapshot.connectionState != ConnectionState.done) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        // 錯誤處理
+        if (snapshot.hasError) {
+          return Center(child: Text('Error: ${snapshot.error}'));
+        } 
+
+        // // 取得資料後的顯示
+          final data = snapshot.data!; 
+          print("data['providerId'] ${data['providerId']}");
+
+          // 延遲到當前 Frame 結束後再更新狀態
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          print("addPostFrameCallback");
+          context.read<LoginModel>().setProviderId(data['providerId']);
+        });
+          //context.read<LoginModel>().setProviderId(data['providerId']);
+        return  MaterialApp(
+          title: 'Counter Demo',
+          theme: ThemeData(primarySwatch: Colors.blue),
+          //home: const HomePage(),
+          initialRoute: AppRoutes.homeName.path,
+          routes: AppRoutes.routes ,
+        // onGenerateInitialRoutes: (RouteSettings settings) => _generateRoute(settings),
+          navigatorObservers: [MyNavigatorObserver()],
+        );
+      }
     );
   }
 }
