@@ -39,8 +39,8 @@ import 'package:ios_flutter/future/firebase_logout.dart';
    ...popItems       };
 
   static  Map<String,Widget>get popLoginItems => {
-    MenuItemName.loginFB.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.facebook,color: Colors.green),Text("Facebook")],),) ,
-    MenuItemName.loginApple.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.apple ,color: Colors.green),Text("Apple")],),) ,
+   // MenuItemName.loginFB.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.facebook,color: Colors.green),Text("Facebook")],),) ,
+   // MenuItemName.loginApple.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.apple ,color: Colors.green),Text("Apple")],),) ,
     MenuItemName.loginEmail.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.email ,color: Colors.green),Text("Email")],),) ,
     MenuItemName.loginAuto.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.auto_awesome ,color: Colors.green),Text("Auto")],),) ,
  

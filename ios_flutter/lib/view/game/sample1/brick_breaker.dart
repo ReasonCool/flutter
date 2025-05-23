@@ -111,7 +111,10 @@ class BrickBreaker extends FlameGame
     //_initGyroscope();
   }
 
- 
+ /*
+ 使用xcode清除暫存之後編譯 在實體機上面可以執行
+ 使用vs code編譯運行時都會出現異常
+ */
   void _initGyroscope() {
     gyroscopeEvents.listen((GyroscopeEvent event) {
       // 确保在主线程上处理事件
