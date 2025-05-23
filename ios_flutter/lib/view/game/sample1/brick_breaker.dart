@@ -5,10 +5,16 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
 import 'components.dart';
 import 'config.dart';
+ 
+ import 'package:sensors_plus/sensors_plus.dart';
+
+
+ 
 
 enum PlayState { welcome, playing, gameOver, won }
 
@@ -51,8 +57,14 @@ class BrickBreaker extends FlameGame
 
     world.add(PlayArea());
 
-    playState = PlayState.welcome;
+    playState = PlayState.welcome; 
+
+      
+
+
   }
+
+  
 
   void startGame() {
     if (playState == PlayState.playing) return;
@@ -95,12 +107,39 @@ class BrickBreaker extends FlameGame
             color: brickColors[i],
           ),
     ]);
+
+    //_initGyroscope();
   }
 
+ 
+  void _initGyroscope() {
+    gyroscopeEvents.listen((GyroscopeEvent event) {
+      // 确保在主线程上处理事件
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        _handleGyroscopeEvent(event);
+      });
+    });
+  }
+
+  void _handleGyroscopeEvent(GyroscopeEvent event) {
+    // 确保 Bat 存在
+    final batList = world.children.query<Bat>();
+    if (batList.isNotEmpty) {
+      final bat = batList.first;
+      // 根据陀螺仪的 x 值控制 Bat 的移动
+      if (event.x > 0.1) {
+        bat.moveBy(batStep); // 向右移动
+      } else if (event.x < -0.1) {
+        bat.moveBy(-batStep); // 向左移动
+      }
+    }
+  }
+  
   @override
   void onTap() {
     super.onTap();
     startGame();
+    
   }
 
   @override

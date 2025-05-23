@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flame/game.dart';
- 
+
+import 'package:sensors_plus/sensors_plus.dart';
 import '../game/sample1/game_app.dart';
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -11,14 +11,19 @@ class GameScreen extends StatefulWidget {
 
 class _GameScreenState extends State<GameScreen> {
  // late final MyWorld _game;
+ 
 
   @override
   void initState() {
     super.initState();
     //_game = SlotMachineGame();
+    
+  
+  
   
   }
 
+ 
     
 
   @override
@@ -44,6 +49,7 @@ class _GameScreenState extends State<GameScreen> {
   @override
   void dispose() {
     //_game.onRemove();
+    
     super.dispose();
   }
 }
