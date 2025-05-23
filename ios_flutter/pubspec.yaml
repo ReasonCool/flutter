@@ -41,6 +41,7 @@ dependencies:
   firebase_core: ^3.13.1    # Firebase 核心库
   firebase_remote_config: ^5.4.4  # Remote Config
   firebase_analytics: ^11.4.6
+  firebase_auth: ^5.5.4
 
   json_annotation: ^4.9.0
 
@@ -48,7 +49,16 @@ dependencies:
 
   #取得版本
   package_info_plus: ^8.3.0
-  firebase_auth: ^5.5.4
+
+#game
+  audioplayers: ^6.4.0  # 音效播放
+  vibration: ^3.1.3   # 震動回f
+  flutter_svg: ^2.0.7  # 用於更複雜的圖形
+  flame: ^1.28.1
+  flutter_animate: ^4.5.2
+  google_fonts: ^6.2.1
+
+
  
 dev_dependencies:
   flutter_test:

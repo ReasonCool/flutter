@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/game/game_screen.dart';
 import 'package:ios_flutter/view/login/auto_login_page.dart';
 import 'package:ios_flutter/view/sub_page/remote_config_page.dart';
 import 'package:ios_flutter/view/sub_page/notification_page.dart';
@@ -44,6 +45,7 @@ import 'package:ios_flutter/view/sub_page/wrap_page.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  game1Name('/Game1Name'),
   autoLoginName('/AutoLoginName'),
   remoteConfigPageName('/RemoteConfigPageName'),
   notificationPageName('/NotificationPageName'),
@@ -89,6 +91,7 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  game1Name.path:(_) => GameScreen(),
   autoLoginName.path: (_) => const AutoLoginPage(),
   remoteConfigPageName.path: (_) => const RemoteConfigPage(),
   notificationPageName.path: (_) => NotificationPage(),
@@ -133,6 +136,7 @@ enum AppRoutes {
   static Map<String,Map<String,String>> get rountNames => {
     //homeName.path: "首頁",arg
     //autoLoginName.path:{"title":"auto login Page "},
+    game1Name.path:{"title":"Game 1"},
     remoteConfigPageName.path:{"title":"Romte Config Page "},
     notificationPageName.path:{"title":"notification Page "},
     providerPageName.path:{"title":"provider Page "},
