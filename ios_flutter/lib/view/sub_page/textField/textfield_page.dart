@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:ios_flutter/interface/data_class.dart';
+import 'package:ios_flutter/interface/login_data_class.dart';
 import 'package:ios_flutter/model/textfield_model.dart';
 
 class TextFieldPage extends StatefulWidget{
@@ -66,6 +66,7 @@ class _TextFieldPageState extends State<TextFieldPage>{
             //檢查
 
             if(checkTextDatas(TextFieldOnChanged,textDatas) == false) return;
+            
             checkSend(sendDataDo,context);
 
           }

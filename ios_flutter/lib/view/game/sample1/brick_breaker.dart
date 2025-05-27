@@ -114,6 +114,8 @@ class BrickBreaker extends FlameGame
  /*
  使用xcode清除暫存之後編譯 在實體機上面可以執行
  使用vs code編譯運行時都會出現異常
+ ERROR:flutter/shell/common/shell.cc(1057)] The 'dev.fluttercommunity.plus/sensors/gyroscope' channel sent a message from native to Flutter on a non-platform thread. Platform channel messages must be sent on the platform thread. Failure to do so may result in data loss or crashes, and must be fixed in the plugin or application code creating that channel.
+See https://docs.flutter.dev/platform-integration/platform-channels#channels-and-platform-threading for more information
  */
   void _initGyroscope() {
     gyroscopeEvents.listen((GyroscopeEvent event) {

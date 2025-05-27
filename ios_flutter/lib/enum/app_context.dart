@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
 import 'package:ios_flutter/view/game/game_screen.dart';
+
 import 'package:ios_flutter/view/login/auto_login_page.dart';
+import 'package:ios_flutter/view/login/email_login_page.dart';
+import 'package:ios_flutter/view/login/email_regist_page.dart';
+
 import 'package:ios_flutter/view/sub_page/remote_config_page.dart';
 import 'package:ios_flutter/view/sub_page/notification_page.dart';
 import 'package:ios_flutter/view/sub_page/provider_page.dart';
@@ -11,7 +15,6 @@ import 'package:ios_flutter/view/sub_page/flow_page.dart';
 import 'package:ios_flutter/view/sub_page/widgets_binding_page.dart';
 import 'package:ios_flutter/view/sub_page/tap_page.dart';
 import 'package:ios_flutter/view/sub_page/dialog_page.dart';
-import 'package:ios_flutter/view/login/email_login_page.dart';
 import 'package:ios_flutter/view/sub_page/fitted_box_page.dart';
 import 'package:ios_flutter/view/sub_page/clip_page.dart';
 import 'package:ios_flutter/view/sub_page/trasform_rotate_box_page.dart';
@@ -46,6 +49,7 @@ import 'package:ios_flutter/view/sub_page/wrap_page.dart';
 enum AppRoutes {
   homeName('/HomeName'),
   game1Name('/Game1Name'),
+  emailRegistPageName('/EmailGegistPageName'),
   autoLoginName('/AutoLoginName'),
   remoteConfigPageName('/RemoteConfigPageName'),
   notificationPageName('/NotificationPageName'),
@@ -92,6 +96,7 @@ enum AppRoutes {
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
   game1Name.path:(_) => GameScreen(),
+  emailRegistPageName.path: (_) => const EmailRegistPage(),
   autoLoginName.path: (_) => const AutoLoginPage(),
   remoteConfigPageName.path: (_) => const RemoteConfigPage(),
   notificationPageName.path: (_) => NotificationPage(),
@@ -137,6 +142,7 @@ enum AppRoutes {
     //homeName.path: "首頁",arg
     //autoLoginName.path:{"title":"auto login Page "},
     game1Name.path:{"title":"Game 1"},
+    emailRegistPageName.path:{'title':'Email 登錄 '},
     remoteConfigPageName.path:{"title":"Romte Config Page "},
     notificationPageName.path:{"title":"notification Page "},
     providerPageName.path:{"title":"provider Page "},

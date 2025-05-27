@@ -6,7 +6,10 @@ class EmailLoginPage extends StatelessWidget{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: Text("test page"),),
-      body:Center(child: Text("Test"),),
+      body:Center(child: Column(children: [
+        //email password
+        
+      ],),),
     );
   }
 }

@@ -17,6 +17,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:universal_io/io.dart';
 
 
+
 Future<Map<String, dynamic>> loadRemoteConfigAndVersion() async {
 
    final packageInfo = await PackageInfo.fromPlatform();

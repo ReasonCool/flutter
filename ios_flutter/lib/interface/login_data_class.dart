@@ -27,5 +27,14 @@ class TextFieldData{
 
       ];
     
+  static List<TextFieldData> get EmailRegistTextFields =>  [
+     
+    TextFieldData( text: "" , labelText: '電子郵件', hintText: 'xxx@xxx.xxx', 
+    prefixIcon:Icon(Icons.person)   ,errorText: "不符合格式",regexpSource:r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$' ),
+    
+    TextFieldData( text: "" , labelText: '密碼', hintText: '英數六碼', prefixIcon:Icon(Icons.person)  
+    ,errorText: "不符合格式",regexpSource: r'^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$'),
+
+    ];
 
 }
