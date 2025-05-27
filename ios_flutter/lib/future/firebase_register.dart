@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/typedef_funtion.dart';
 import '../firebase_options.dart'; 
 import 'package:firebase_auth/firebase_auth.dart';  //登入
-import 'package:ios_flutter/enum/login_enum.dart';
+import 'package:ios_flutter/enum/email_regist_enum.dart';
 
-Future  sendEmailRegistInfo(BuildContext context,  String emailAddress,String password,VoidRegistStateCallback resultCallback) async{
+
+Future  sendEmailRegistInfo(BuildContext context,  String emailAddress,String password,VoidEmailRegistStateCallback resultCallback) async{
   
-  RegistState registValue = RegistState.fail;
+  EmailRegistState registValue = EmailRegistState.fail;
   
    
   try {
@@ -18,10 +19,10 @@ Future  sendEmailRegistInfo(BuildContext context,  String emailAddress,String pa
     );
     if(userCredential.user?.emailVerified == false){
        await userCredential.user?.sendEmailVerification(); 
-      registValue = RegistState.waitEmailVerify;
+      registValue = EmailRegistState.waitEmailVerify;
     }
     if(userCredential.user?.emailVerified == true){
-      registValue = RegistState.success;
+      registValue = EmailRegistState.success;
     }
      
      print('FirebaseAuth userCredential: $userCredential');
@@ -46,11 +47,11 @@ Future  sendEmailRegistInfo(BuildContext context,  String emailAddress,String pa
 
   } on FirebaseAuthException catch (e) {
     if (e.code == 'weak-password') {
-      registValue = RegistState.weakPassword;
+      registValue = EmailRegistState.weakPassword;
       print('The password provided is too weak.');
 
     } else if (e.code == 'email-already-in-use') {
-      registValue = RegistState.aleardy;
+      registValue = EmailRegistState.aleardy;
       print('The account already exists for that email.');
 
     }
@@ -86,3 +87,6 @@ Future  sendEmailRegistInfo(BuildContext context,  String emailAddress,String pa
         //       }
         //     } 
     }
+
+
+

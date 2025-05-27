@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/login_data_class.dart';
-import 'package:ios_flutter/model/textfield_model.dart';
+import 'package:ios_flutter/model/email_regist_model.dart';
 
 class TextFieldPage extends StatefulWidget{
   const TextFieldPage ({Key? key}) : super(key:key);

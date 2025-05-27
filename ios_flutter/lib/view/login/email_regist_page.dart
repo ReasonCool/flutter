@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/login_data_class.dart';
 import 'package:ios_flutter/interface/typedef_funtion.dart';
-import 'package:ios_flutter/model/textfield_model.dart';
+import 'package:ios_flutter/model/email_regist_model.dart';
 import 'package:ios_flutter/future/firebase_register.dart';
-import 'package:ios_flutter/enum/login_enum.dart';
+import 'package:ios_flutter/enum/email_regist_enum.dart';
  import 'package:firebase_auth/firebase_auth.dart';  //登入
  
 class EmailRegistPage extends StatefulWidget{
@@ -17,8 +17,7 @@ class EmailRegistPage extends StatefulWidget{
 class _EmailRegistPageState extends State<EmailRegistPage>{
 //輸入資料匡設定資料
  late List<TextFieldData> textDatas ;
- //驗證結果
- UserCredential? userCredential;
+ 
 
 //初始化狀態
   @override
@@ -30,24 +29,22 @@ class _EmailRegistPageState extends State<EmailRegistPage>{
   } 
 
   //確認登錄的狀態
-   RegistState  resultState  = RegistState.waitRegist;
+   EmailRegistState  resultState  = EmailRegistState.waitRegist;
   
 
   //修改登錄狀態並改變ＵＩ
-  void modifyResult(RegistState  resultValue ,[UserCredential? userCredentialInfo]){ 
+  void modifyResult(EmailRegistState  resultValue ){ 
 
     setState(() {
      resultState = resultValue;
-     if (userCredentialInfo != null){
-      userCredential = userCredentialInfo;
-     }
+     
     });
   }
 
   
 
 //登錄電子郵件與密碼畫面
-Widget registFrom(VoidRegistStateCallback modifyResult1){
+Widget registFrom(VoidEmailRegistStateCallback modifyResult1){
   TextFieldOnChanged(value,index){
         setState(() {
             bool isVerify = RegExp(textDatas[index].regexpSource).hasMatch(value);
@@ -105,7 +102,7 @@ Widget registFrom(VoidRegistStateCallback modifyResult1){
   
     return Scaffold(
       appBar: AppBar(title: Text("Email 登錄"),),
-      body: (resultState == RegistState.waitRegist) ? registFrom(modifyResult) : resultState.buildWidgetByRegistState(textDatas)
+      body: (resultState == EmailRegistState.waitRegist) ? registFrom(modifyResult) : resultState.buildWidgetByEmailRegistState(textDatas)
     );
   }
 }

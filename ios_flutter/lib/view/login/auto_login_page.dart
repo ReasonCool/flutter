@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:ios_flutter/future/firebase_login.dart';
 import 'package:ios_flutter/model/loginInfo.dart';
 import 'package:provider/provider.dart';
+import 'package:ios_flutter/enum/login_type_enum.dart';
+ 
 
 class AutoLoginPage extends StatefulWidget{
   const AutoLoginPage ({Key? key}): super (key:key);
@@ -43,7 +45,7 @@ class _AutoLoginPage extends State<AutoLoginPage>{
         // 延遲到當前 Frame 結束後再更新狀態
         WidgetsBinding.instance.addPostFrameCallback((_) {
           print("addPostFrameCallback");
-          context.read<LoginModel>().setProviderId(data['providerId']);
+          context.read<LoginModel>().setProviderId(LoginType.autoLogin.path);
         });
            
 

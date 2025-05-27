@@ -5,20 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/typedef_funtion.dart';
 import 'package:ios_flutter/interface/login_data_class.dart';
 
-
-enum LoginDataType {
-  userName('/UserName'),
-  userEmail('/UserEmail'),
-  userPhone('/UserPhone'),
-  userPassWord('/UserPassWord');
-
-final String loginType;
-const LoginDataType(this.loginType);
-}
+import 'package:ios_flutter/enum/login_text_enum.dart';
 
 
 
-checkEmailSend( EmailRegistContextCallBack sendDataDo1,BuildContext context,List<TextFieldData> emailInfo, VoidRegistStateCallback reslutCallback, [String titleValue = '確定要離開嗎？',String contentValue = '離開後未儲存的變更將會遺失']){
+
+
+checkEmailSend( EmailRegistContextCallBack sendDataDo1,BuildContext context,List<TextFieldData> emailInfo, VoidEmailRegistStateCallback reslutCallback, [String titleValue = '確定要離開嗎？',String contentValue = '離開後未儲存的變更將會遺失']){
  
  //
   //嵌套詢問
