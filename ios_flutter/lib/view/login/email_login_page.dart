@@ -113,7 +113,10 @@ Widget registFrom(VoidEmailLoginStateCallback modifyResult1){
 // 延遲到當前 Frame 結束後再更新狀態
         WidgetsBinding.instance.addPostFrameCallback((_) {
           print("addPostFrameCallback");
-          context.read<LoginModel>().setProviderId(LoginType.emailPassword.path);
+          if (resultState == EmailLoginState.success){
+            context.read<LoginModel>().setProviderId(LoginType.emailPassword.path);
+          }
+          
         });
     
   

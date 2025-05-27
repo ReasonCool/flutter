@@ -14,7 +14,7 @@ class AutoLoginPage extends StatefulWidget{
 }
 class _AutoLoginPage extends State<AutoLoginPage>{
  late Future<Map<String, dynamic>> _nonNameLogin;
-
+bool loginSuccess = false;
 @override
   void initState() {
     // TODO: implement initState
@@ -41,11 +41,18 @@ class _AutoLoginPage extends State<AutoLoginPage>{
           // 取得資料後的顯示
           final data = snapshot.data!;
           print('auto login data:${data.toString()}'); 
-
+          if(data['isLogin'] as bool  == true){
+            loginSuccess = true;
+          }
         // 延遲到當前 Frame 結束後再更新狀態
         WidgetsBinding.instance.addPostFrameCallback((_) {
           print("addPostFrameCallback");
-          context.read<LoginModel>().setProviderId(LoginType.autoLogin.path);
+          if (loginSuccess  == true){
+            context.read<LoginModel>().setProviderId(LoginType.autoLogin.path);
+          }else{
+            context.read<LoginModel>().setProviderId(null);
+          }
+          
         });
            
 
@@ -53,11 +60,12 @@ class _AutoLoginPage extends State<AutoLoginPage>{
           Center(child:  Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              
-              data['isLogin'] as bool ? Text('登入成功') : Text('登入失敗'),
+               
+             loginSuccess ? Text('登入成功') : Text('登入失敗'),
               
               ElevatedButton(onPressed: (){
                     Navigator.pop(context);
+
               }, child:   Text("返回")),
               
             ],)
