@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/enum/home_left_page_enum.dart';
 import 'package:ios_flutter/enum/app_context.dart';
- 
  //provider
 import 'package:provider/provider.dart';
 import 'package:ios_flutter/model/loginInfo.dart';
-
 import 'package:ios_flutter/future/firebase_logout.dart';
 
 

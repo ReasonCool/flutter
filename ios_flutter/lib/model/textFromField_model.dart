@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/interface/login_data_class.dart';
-import 'package:ios_flutter/interface/typedef_funtion.dart';
+import 'package:ios_flutter/interface/email_typedef_funtion.dart';
 
  List<Widget>  createTextFormFields(List<TextFieldData> textDatas,
                                 VoidTextFieldCallback  TextFieldOnChanged,

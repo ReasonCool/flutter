@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/enum/login_type_enum.dart';
 import 'package:ios_flutter/interface/login_data_class.dart';
-import 'package:ios_flutter/interface/typedef_funtion.dart';
+import 'package:ios_flutter/interface/email_typedef_funtion.dart';
 import 'package:ios_flutter/model/email_login_model.dart';
 import 'package:ios_flutter/future/firebase_login.dart';
 import 'package:ios_flutter/enum/email_login_enum.dart';

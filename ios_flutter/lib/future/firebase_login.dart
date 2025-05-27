@@ -1,13 +1,8 @@
- //firbase
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import '../firebase_options.dart'; 
+  //firbase
 import 'package:firebase_auth/firebase_auth.dart';  //登入
- 
- 
-import 'package:ios_flutter/interface/typedef_funtion.dart';
- 
- 
+  
+import 'package:ios_flutter/interface/email_typedef_funtion.dart';
 import 'package:ios_flutter/enum/email_login_enum.dart';
 
 
