@@ -58,6 +58,7 @@ dependencies:
   flutter_animate: ^4.5.2
   google_fonts: ^6.2.1
   sensors_plus: ^2.0.0 #陀螺儀
+  shared_preferences: ^2.5.3
 
 
  
