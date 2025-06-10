@@ -6,7 +6,7 @@ import 'package:ios_flutter/view/sub_page/text_page.dart';
 
 class TapPage extends StatefulWidget{
 
-  const TapPage({Key? key}): super(key:key);
+  const TapPage({super.key});
 
   @override
   State<TapPage> createState() => _TapPageState();

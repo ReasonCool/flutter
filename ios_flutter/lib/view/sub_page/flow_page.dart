@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class FlowPage extends StatelessWidget{
 
-  const FlowPage ({Key? key}): super (key:key);
+  const FlowPage ({super.key});
 
   @override
   Widget build(BuildContext context){

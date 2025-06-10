@@ -11,7 +11,7 @@ import 'package:ios_flutter/model/loginInfo.dart';
 import 'package:provider/provider.dart';
 
 class EmailLoginPage extends StatefulWidget{
-  const EmailLoginPage ({Key? key}): super (key:key);
+  const EmailLoginPage ({super.key});
 
   @override
   State<EmailLoginPage> createState() => _EmailLoginPage();
@@ -68,13 +68,13 @@ Widget registFrom(VoidEmailLoginStateCallback modifyResult1){
         }
       
 
-      };
+      }
        
   TextFieldOnSubmitted (value,index) {
             print("TextFieldOnSubmitted value:$value index:$index");
              
  
-      };
+      }
 
      List<Widget>  textFields = createTextFields(textDatas,
                                                   TextFieldOnChanged,

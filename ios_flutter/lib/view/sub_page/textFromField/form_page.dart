@@ -5,7 +5,7 @@ import 'package:ios_flutter/model/textFromField_model.dart';
 class FormPage extends StatefulWidget{
   
 
-  const FormPage ({Key? key}):super(key:key);
+  const FormPage ({super.key});
   @override
   State<FormPage> createState() => _FormPageState(); 
 }
@@ -43,13 +43,13 @@ class _FormPageState extends State<FormPage>{
         }
       
 
-      };
+      }
        
       TextFieldOnSubmitted (value,index) {
             print("TextFieldOnSubmitted value:$value index:$index");
              
  
-      };
+      }
 
       List<Widget> textFieldList = createTextFormFields(textDatas, TextFieldOnChanged, TextFieldOnEditingComplete, TextFieldOnSubmitted);
 

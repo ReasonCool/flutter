@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
  
 class DecoratedBoxPage extends StatelessWidget{
 
-  const DecoratedBoxPage ({Key? key}): super (key:key);
+  const DecoratedBoxPage ({super.key});
 
   @override
   Widget build(BuildContext context){

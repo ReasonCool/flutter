@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
  
 class ProgressIndicatorPage extends StatefulWidget{
-  const ProgressIndicatorPage ({Key? key}): super (key:key);
+  const ProgressIndicatorPage ({super.key});
   
   @override
   State<ProgressIndicatorPage> createState() => _ProgressIndicatorPageState();

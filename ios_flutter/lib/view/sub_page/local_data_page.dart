@@ -11,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LocalDataPage extends StatefulWidget{
 
-  const LocalDataPage ({Key? key}):super (key:key);
+  const LocalDataPage ({super.key});
 
   @override
   State<LocalDataPage> createState() => _LocalDataPage();

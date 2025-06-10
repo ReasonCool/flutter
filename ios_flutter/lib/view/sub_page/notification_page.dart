@@ -5,7 +5,7 @@ class CustomMessageNotification extends Notification {
   const CustomMessageNotification(this.message);
 }
 class ChildWidget extends StatelessWidget {
-   ChildWidget({Key? key,required this.textString}): super(key:key);
+   ChildWidget({super.key,required this.textString});
   String textString;
   @override
   Widget build(BuildContext context) {

@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 class TransformRotateBoxPage extends StatelessWidget{
 
-  const TransformRotateBoxPage ({Key? key}): super(key:key);
+  const TransformRotateBoxPage ({super.key});
   
   @override
   Widget build(BuildContext context){

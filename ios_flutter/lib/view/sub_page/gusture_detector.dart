@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TapboxA extends StatefulWidget{
-  TapboxA({Key? key}) : super (key: key);
+  TapboxA({super.key});
   
   @override
   State<TapboxA> createState() => _TapboxAState();
@@ -16,6 +16,7 @@ class _TapboxAState extends State<TapboxA>{
     });
   }
 
+  @override
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(

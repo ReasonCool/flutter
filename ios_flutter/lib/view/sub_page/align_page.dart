@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
  
 class AlignPage extends StatelessWidget{
 
-  const AlignPage ({Key? key}): super (key:key);
+  const AlignPage ({super.key});
 
   @override
   Widget build(BuildContext context){

@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class DialogPage extends StatelessWidget{
 
-  const DialogPage ({Key? key}): super(key:key);
+  const DialogPage ({super.key});
 
   @override
   Widget build(BuildContext context){
 
-void _showAlertDialog(BuildContext context) {
+void showAlertDialog(BuildContext context) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -30,7 +30,7 @@ void _showAlertDialog(BuildContext context) {
     );
   }
 
-  void _showBottomSheet(BuildContext context) {
+  void showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       builder: (context) => Container(
@@ -68,12 +68,12 @@ void _showAlertDialog(BuildContext context) {
       appBar: AppBar(title: Text("Dialog 對話匡"),),
       body:Center(child:  Column(children: [
         ElevatedButton(onPressed: () {
-          _showAlertDialog(context);
+          showAlertDialog(context);
         }
         , child: 
         Text("彈出對話匡")),
         ElevatedButton(onPressed: () {
-          _showBottomSheet(context);
+          showBottomSheet(context);
         }
         , child: 
         Text("彈出底部彈窗")),

@@ -55,6 +55,7 @@ dependencies:
   vibration: ^3.1.3   # 震動回f
   flutter_svg: ^2.0.7  # 用於更複雜的圖形
   flame: ^1.28.1
+  flame_forge2d: ^0.18.0
   flutter_animate: ^4.5.2
   google_fonts: ^6.2.1
   sensors_plus: ^2.0.0 #陀螺儀
@@ -91,7 +92,14 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-  assets: [resource/images/]
+  assets:
+    - resource/images/
+    - resource/images/little_mary/
+    - assets/images/resource/images/little_mary/
+    - assets/images/resource/images/little_mary/table/
+    - assets/images/resource/images/
+    #修改此資料 選則main.dart 才可以run app
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

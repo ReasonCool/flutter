@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class  NaviTransforData extends StatelessWidget {
-  const NaviTransforData ({Key? key}) : super (key:key);
+  const NaviTransforData ({super.key});
 
    
   @override

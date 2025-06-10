@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class ClipPage extends StatelessWidget {
   
-  const ClipPage({Key? key}):super(key:key);
+  const ClipPage({super.key});
   
   @override
   Widget build(BuildContext context) {

@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
 //json
 import 'dart:convert';
 
-import 'package:json_annotation/json_annotation.dart';
  
 import 'package:ios_flutter/model/appversion.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:sensors_plus/sensors_plus.dart';
 import '../game/sample1/game_app.dart';
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 class WrapPage extends StatelessWidget{
 
-  const WrapPage ({Key? key}): super (key:key);
+  const WrapPage ({super.key});
 
   @override
   Widget build(BuildContext context){

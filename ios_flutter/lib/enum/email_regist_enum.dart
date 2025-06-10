@@ -1,10 +1,7 @@
-import 'dart:math';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ios_flutter/interface/login_data_class.dart';
-import 'package:ios_flutter/interface/email_typedef_funtion.dart';
 
 
  

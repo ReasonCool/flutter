@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
  
 class InheritedWidgetPage extends StatefulWidget{
- const InheritedWidgetPage ({Key? key}): super(key:key);
+ const InheritedWidgetPage ({super.key});
 
 
   @override
@@ -40,11 +40,11 @@ class _InheritedWidgetPageState extends State<InheritedWidgetPage>{
 }
 class ShareDataWidget extends InheritedWidget{
   ShareDataWidget({
-    Key? key,
+    super.key,
     required this.count,
-    required Widget child,
+    required super.child,
 
-  }) : super(key:key ,child:child);
+  });
 
 
   final int count;

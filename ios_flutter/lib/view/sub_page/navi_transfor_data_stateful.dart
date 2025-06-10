@@ -1,7 +1,7 @@
  import 'package:flutter/material.dart';
 
 class NavigatorTransforDataSateful extends StatefulWidget{
-  const NavigatorTransforDataSateful ({Key? key}) : super (key: key);
+  const NavigatorTransforDataSateful ({super.key});
 
   @override
   State<NavigatorTransforDataSateful> createState() {

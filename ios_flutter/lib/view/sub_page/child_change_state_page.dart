@@ -90,8 +90,7 @@ class _ParentWidgetState extends State<ParentWidget> {
 //------------------------- TapboxB ----------------------------------
 
 class TapboxB extends StatefulWidget {
-  TapboxB({Key? key, this.active = false, required this.onChanged})
-      : super(key: key);
+  TapboxB({super.key, this.active = false, required this.onChanged});
 
 
       final bool active;
@@ -122,6 +121,7 @@ void _handleButtonText() {
     
   }
 
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: _handleTap,

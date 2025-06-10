@@ -100,7 +100,7 @@ class CounterButtons extends StatelessWidget {
 
 
 class ProviderPage extends StatefulWidget{
-  const ProviderPage ({Key? key}):super (key:key);
+  const ProviderPage ({super.key});
 
   @override
   State<ProviderPage> createState() => _ProviderPageState() ;

@@ -4,7 +4,7 @@ import 'package:ios_flutter/interface/login_data_class.dart';
 import 'package:ios_flutter/model/email_regist_model.dart';
 
 class TextFieldPage extends StatefulWidget{
-  const TextFieldPage ({Key? key}) : super(key:key);
+  const TextFieldPage ({super.key});
 
   @override
   State<TextFieldPage> createState() => _TextFieldPageState();
@@ -42,13 +42,13 @@ class _TextFieldPageState extends State<TextFieldPage>{
         }
       
 
-      };
+      }
        
       TextFieldOnSubmitted (value,index) {
             print("TextFieldOnSubmitted value:$value index:$index");
              
  
-      };
+      }
 
      List<Widget>  textFields = createTextFields(textDatas,
                                                   TextFieldOnChanged,

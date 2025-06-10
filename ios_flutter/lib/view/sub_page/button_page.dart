@@ -4,7 +4,7 @@ class ButtonPage extends StatelessWidget{
   @override
   Widget build(BuildContext context){
 
-    _onPressed(){
+    onPressed(){
       print("button pressed");
     }
 
@@ -30,17 +30,17 @@ class ButtonPage extends StatelessWidget{
         ),ElevatedButton.icon(
           icon: Icon(Icons.send),
           label: Text("ElevatedButton.icon"),
-          onPressed: _onPressed,
+          onPressed: onPressed,
         ),
         OutlinedButton.icon(
           icon: Icon(Icons.add),
           label: Text("OutlinedButton.icon"),
-          onPressed: _onPressed,
+          onPressed: onPressed,
         ),
         TextButton.icon(
           icon: Icon(Icons.info),
           label: Text("TextButton.icon"),
-          onPressed: _onPressed,
+          onPressed: onPressed,
         ),
 
       ],),

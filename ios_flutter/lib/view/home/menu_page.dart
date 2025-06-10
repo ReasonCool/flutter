@@ -29,7 +29,7 @@ PopupMenuButton<String> homeLeftMenu( BuildContext context ){
      
     }
 
-};
+}
 
 
  final List<PopupMenuItem<String>> popLoginList = popLoginItems.entries.map((entry) => PopupMenuItem<String> (

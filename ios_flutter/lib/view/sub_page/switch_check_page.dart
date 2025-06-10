@@ -9,6 +9,8 @@
 需要知道新值	ValueChanged<bool>	onChanged: (value) => ...
 
  */
+library;
+
 import "package:flutter/material.dart";
 import 'package:ios_flutter/constant/checkbox_switch.dart'; 
 
@@ -21,7 +23,7 @@ class SwitchCheckPage extends StatefulWidget{
 
   final List<CheckData>? checkValueTags ;
   
-   SwitchCheckPage ({Key? key,this.checkValueTags ,this.switchValueTags }): super (key:key);
+   SwitchCheckPage ({super.key,this.checkValueTags ,this.switchValueTags });
 
   @override
   State<SwitchCheckPage> createState() => _SwitchCheckPageState();

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ios_flutter/future/firebase_remote_config.dart';
 
 class RemoteConfigPage extends StatefulWidget{
-  const RemoteConfigPage ({Key? key}) : super (key:key);
+  const RemoteConfigPage ({super.key});
 
   @override
   State<RemoteConfigPage> createState() => _RemoteConfigPageState();

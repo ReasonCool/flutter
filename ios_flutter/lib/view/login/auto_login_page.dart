@@ -7,7 +7,7 @@ import 'package:ios_flutter/enum/login_type_enum.dart';
  
 
 class AutoLoginPage extends StatefulWidget{
-  const AutoLoginPage ({Key? key}): super (key:key);
+  const AutoLoginPage ({super.key});
 
   @override
   State<AutoLoginPage> createState() => _AutoLoginPage(); 

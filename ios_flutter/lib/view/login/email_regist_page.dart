@@ -9,7 +9,7 @@ import 'package:ios_flutter/enum/email_regist_enum.dart';
  import 'package:firebase_auth/firebase_auth.dart';  //登入
  
 class EmailRegistPage extends StatefulWidget{
-  const EmailRegistPage ({Key? key}): super (key:key);
+  const EmailRegistPage ({super.key});
 
 @override
   State<EmailRegistPage> createState() => _EmailRegistPageState();
@@ -62,13 +62,13 @@ Widget registFrom(VoidEmailRegistStateCallback modifyResult1){
         }
       
 
-      };
+      }
        
   TextFieldOnSubmitted (value,index) {
             print("TextFieldOnSubmitted value:$value index:$index");
              
  
-      };
+      }
 
      List<Widget>  textFields = createTextFields(textDatas,
                                                   TextFieldOnChanged,

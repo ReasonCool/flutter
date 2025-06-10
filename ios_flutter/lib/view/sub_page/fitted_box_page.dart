@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 //
 class FittedBoxPage extends StatelessWidget{
 
-  const FittedBoxPage ({Key? key}): super(key:key);
+  const FittedBoxPage ({super.key});
 
 
 Widget wContainer(BoxFit boxFit) {

@@ -16,24 +16,24 @@ import 'package:flutter/material.dart';
   const MenuItemName(this.itemName);
 
   static Map<String,Widget> popItems = { 
-    MenuItemName.setting.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text("設定")],),) ,
-    MenuItemName.abouUs.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.info ,color: Colors.green),Text("關於")],),) ,
+    MenuItemName.setting.itemName:SizedBox(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text("設定")],),) ,
+    MenuItemName.abouUs.itemName:SizedBox(width: 120,height: 50,child: Row(children: [Icon(Icons.info ,color: Colors.green),Text("關於")],),) ,
       };
 
 
   static  Map<String,Widget>get popItemsIsLogin => { 
-    MenuItemName.login.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.login.itemName)],),) ,
+    MenuItemName.login.itemName:SizedBox(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.login.itemName)],),) ,
     ...popItems      };
 
     static  Map<String,Widget>get popItemsIsLogout => { 
-    MenuItemName.logout.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.logout.itemName)],),) ,
+    MenuItemName.logout.itemName:SizedBox(width: 120,height: 50,child: Row(children: [Icon(Icons.settings,color: Colors.green),Text(MenuItemName.logout.itemName)],),) ,
    ...popItems       };
 
   static  Map<String,Widget>get popLoginItems => {
    // MenuItemName.loginFB.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.facebook,color: Colors.green),Text("Facebook")],),) ,
    // MenuItemName.loginApple.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.apple ,color: Colors.green),Text("Apple")],),) ,
-    MenuItemName.loginEmail.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.email ,color: Colors.green),Text("Email")],),) ,
-    MenuItemName.loginAuto.itemName:Container(width: 120,height: 50,child: Row(children: [Icon(Icons.auto_awesome ,color: Colors.green),Text("Auto")],),) ,
+    MenuItemName.loginEmail.itemName:SizedBox(width: 120,height: 50,child: Row(children: [Icon(Icons.email ,color: Colors.green),Text("Email")],),) ,
+    MenuItemName.loginAuto.itemName:SizedBox(width: 120,height: 50,child: Row(children: [Icon(Icons.auto_awesome ,color: Colors.green),Text("Auto")],),) ,
  
   };
 

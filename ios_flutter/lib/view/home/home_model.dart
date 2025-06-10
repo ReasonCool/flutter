@@ -14,7 +14,7 @@ Widget _buildElevateButton(BuildContext context,MapEntry<String,Map<String,Strin
         titleStr = buttonText['title']!;
      }else{
         titleStr = "not title";
-     };
+     }
 
      final String? argStr = buttonText['arg'];
     final bool isAwait;
@@ -27,11 +27,11 @@ Widget _buildElevateButton(BuildContext context,MapEntry<String,Map<String,Strin
 
     void pressedNotResult(){
         Navigator.pushNamed(context, routePath, arguments: argStr); 
-    };
+    }
     void pressedResult() async{
       var result = await Navigator.pushNamed(context, routePath, arguments: argStr); 
       print("pressedResult: $result");
-    };
+    }
     
 
     return Container(

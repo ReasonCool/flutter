@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ios_flutter/view/home/home.dart';
+import 'package:ios_flutter/view/game/little_mary/main_view.dart';
 import 'package:ios_flutter/view/game/game_screen.dart';
 
 import 'package:ios_flutter/view/login/auto_login_page.dart';
@@ -20,7 +21,6 @@ import 'package:ios_flutter/view/sub_page/dialog_page.dart';
 import 'package:ios_flutter/view/sub_page/fitted_box_page.dart';
 import 'package:ios_flutter/view/sub_page/clip_page.dart';
 import 'package:ios_flutter/view/sub_page/trasform_rotate_box_page.dart';
-import 'package:ios_flutter/view/sub_page/widgets_binding_page.dart';
 import 'package:ios_flutter/view/sub_page/layout_build_page.dart';
 import 'package:ios_flutter/view/sub_page/align_page.dart';
 import 'package:ios_flutter/view/sub_page/decorated_box_page.dart';
@@ -50,6 +50,7 @@ import 'package:ios_flutter/view/sub_page/wrap_page.dart';
  
 enum AppRoutes {
   homeName('/HomeName'),
+  littleMary('/LittleMary'),
   localDataPageName('/LocalDataPageName'),
   game1Name('/Game1Name'),
   emailRegistPageName('/EmailGegistPageName'),
@@ -98,6 +99,7 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  littleMary.path: (_) =>   LittleMaryMainView(),
   localDataPageName.path:(_) => const LocalDataPage(),
   game1Name.path:(_) => GameScreen(),
   emailRegistPageName.path: (_) => const EmailRegistPage(),
@@ -146,6 +148,7 @@ enum AppRoutes {
     //homeName.path: "首頁",arg
     //autoLoginName.path:{"title":"auto login Page "},
     localDataPageName.path:{'title':'本地資料'},
+    littleMary.path:{'title':'小馬莉'},
     game1Name.path:{"title":"Game 1"},
     emailRegistPageName.path:{'title':'Email 登錄 '},
     remoteConfigPageName.path:{"title":"Romte Config Page "},
