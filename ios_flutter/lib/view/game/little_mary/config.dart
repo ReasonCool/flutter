@@ -5,6 +5,7 @@ const gameHeight = 1500.0;
 const itemWidth = gameWidth/7;
 const itemHeight = itemWidth;
 
+
 const tablePath = 'resource/images/little_mary/table/';
    
 const tableNames = [
@@ -16,3 +17,10 @@ const tableNames = [
        'star','orange_multiple_2',
        'melon','melon_multiple_2','apple','seven','seven_multiple_2','bell','orange',
     ];
+const bettingItemPath = 'resource/images/little_mary/';
+const bettingItemNames = [
+  'bar','seven','star','water_melon','bell','melon','orange','apple',
+];
+
+
+ 

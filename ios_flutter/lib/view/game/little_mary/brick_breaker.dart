@@ -7,6 +7,7 @@ import 'package:flame/game.dart';
 import 'components.dart';
 import 'config.dart';
 
+ 
 
 class BrickBreaker extends FlameGame {
   BrickBreaker()
@@ -29,68 +30,115 @@ class BrickBreaker extends FlameGame {
 
   world.add(PlayArea());
 
+ Vector2 startPosition = Vector2(10,10);
   
   final spriteInfos = await createSpriteInfos(tablePath,tableNames );
-  final spriteComponents =   createPlayTablePosition(spriteInfos);
+  final playTableInfos =   createPlayTablePosition(spriteInfos,startPosition);
+  final playTableSpriteComponents =   playTableInfos.$1;
+  startPosition =  playTableInfos.$2;
 
-  spriteComponents.forEach((item)=> world.add(item)); 
+
+ playTableSpriteComponents.forEach((item)=> world.add(item)); 
+
+ startPosition.y += 30;
+
+ final bettingSpriteInfos = await createSpriteInfos(bettingItemPath, bettingItemNames);
+ final bettingInfos =   createBettingPosition(bettingSpriteInfos,startPosition);
+  final bettingSpriteComponents =   bettingInfos.$1;
+ startPosition =  playTableInfos.$2;
+
+  bettingSpriteComponents.forEach((item)=> world.add(item)); 
 
 }
 
-List<SpriteComponent> createPlayTablePosition(List<Sprite> spriteInfos){
+(List<SpriteComponent>,Vector2) createBettingPosition(List<Sprite> spriteInfos ,Vector2 startPosition){
 
-   double x1 = 0;
-   double y1 = 0;
-   double scaleValue = (820/7)/120;
-   int row = 1;
+   double x1 = startPosition.x;
+   double y1 = startPosition.y;
+    Vector2 endPosition = Vector2(x1, y1);
+    double maxWidth = gameWidth-startPosition.x-startPosition.x;
+   int maxColumn = 8;
+   double widthValue = 120;
+   double scaleValue = (maxWidth/maxColumn)/widthValue; 
+  
+   int index = 0;
    
+    
+   
+   final spriteComponents = spriteInfos.map((spriteInfo){  
+     index ++; 
+      if(index > 1){
+           x1 +=  widthValue*scaleValue;
+        }
+     
+     
+      final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1, y1),scale: Vector2(scaleValue,scaleValue));
+    
+      return spriteComponent;
+    }).toList(); 
+    endPosition.x = startPosition.x;
+    endPosition.y =  widthValue*scaleValue;
+    return (spriteComponents,endPosition);
+  }
+
+
+(List<SpriteComponent>, Vector2) createPlayTablePosition(List<Sprite> spriteInfos ,Vector2 startPosition){
+
+   double x1 = startPosition.x;
+   double y1 = startPosition.y;
+    double widthValue = 120;
+   int row = 1;
+   double maxWidth = gameWidth-startPosition.x-startPosition.x;
    bool isLeft = true;
    int index = 0;
    int maxColumn = 7;
-    
+    double scaleValue = ((maxWidth)/maxColumn)/widthValue; 
+   Vector2 endPosition = Vector2(x1, y1);
    
-   return spriteInfos.map((spriteInfo){  
+   final spriteComponents =  spriteInfos.map((spriteInfo){  
      
       index ++;
        if(index <= maxColumn   ){
         row = 1;
         if(index > 1){
-           x1 +=  120;
+           x1 +=   widthValue*scaleValue;
         }
        
-        y1 = 0;
+        y1 = startPosition.y;
        }else if(index <= (spriteInfos.length - maxColumn )){
         if(isLeft == true){
           row++;
           isLeft = false;
-          x1 = 0;
-          y1 += 120;
+          x1 = startPosition.x;
+          y1 +=  widthValue*scaleValue;
         }else{
           isLeft = true;
-          x1 = ((120 * 6) as num).toDouble()  ;
+          x1 += ((widthValue*scaleValue * 6) as num).toDouble()  ;
         }
         
        }else{
         //last row 
         if(index ==  (spriteInfos.length - maxColumn ) + 1){
           row++;
-          x1 = 0;
-          y1 += 120;
+          x1 = startPosition.x;
+          y1 += widthValue*scaleValue;
         
         }else{
-           x1 +=  120;
+           x1 += widthValue*scaleValue;
 
         }
        } 
 
-      
-      
+      endPosition.x = startPosition.x;
+      endPosition.y = y1 +  (widthValue*scaleValue);
       
      
-      final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1*scaleValue, y1*scaleValue),scale: Vector2(scaleValue,scaleValue));
-    
+      final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1, y1),scale: Vector2(scaleValue,scaleValue));
+
       return spriteComponent;
     }).toList(); 
+
+    return (spriteComponents,endPosition);
   }
 
 
