@@ -30,10 +30,19 @@ camera.viewfinder.anchor = Anchor.topLeft;
     world.add(PlayArea());
 
     final tablePath = 'resource/images/little_mary/table/';
-    final tableNames = [  'bar', 'bar25', 'bar50', 'bell'  ];
-    //final tableNames = [
+    //final tableNames = [  'bar', 'bar25', 'bar50', 'bell'  ];
+    final tableNames = [
+       'orange','bell','bar50','bar','bar25','apple','melon',
+       'bell_multiple_2', 'water_melon',
+       'apple','water_melon_multiple_2',
+       'once_more', 'once_more', 
+       'star_multiple_2', 'apple',
+       'star','orange_multiple_2',
+       'melon','melon_multiple_2','apple','seven','seven_multiple_2','bell','orange',
+    ];
+    // final tableNames = [
     //   'apple', 'bar', 'bar25', 'bar50', 'bell','bell_multiple_2', 'melon',
-    //   'melon_multiple_2', 'once_more', 'orange', 'orange_multiple_2', 'seven',
+    //   'melon_multiple_2', 'once_more', , 'orange_multiple_2', 'seven',
     //   'seven_multiple_2', 'star', 'star_multiple_2', 'water_melon', 'water_melon_multiple_2'
     // ];
     //bell_multiple_2.png
@@ -45,22 +54,54 @@ camera.viewfinder.anchor = Anchor.topLeft;
  
    double x1 = 0;
    double y1 = 0;
+   double scaleValue = (820/7)/120;
+   int row = 1;
+   
+   bool isLeft = true;
    int index = 0;
-   final spriteComponents =  imageInfos.map((imageInfo){  
-      // if (x1 >= gameWidth) {
-      //   x1 = 0;
-      //   index += 1;
-        
-      // }
+   int maxColumn = 7;
     
-       final vec =  Vector2(-x1, y1);
-      final spriteComponent =   SpriteComponent(sprite: Sprite(imageInfo,srcPosition:vec,srcSize: Vector2(x1+120 ,120)));
-      if( index == 0 || index == imageInfos.length-1){
-        x1 +=  120;
-      }else{
-        x1 = gameWidth - 120;
-      }  
+   
+   final spriteComponents =  imageInfos.map((imageInfo){  
+      index ++;
+       if(index <= maxColumn   ){
+        row = 1;
+        if(index > 1){
+           x1 +=  120;
+        }
+       
+        y1 = 0;
+       }else if(index <= (imageInfos.length - maxColumn )){
+        if(isLeft == true){
+          row++;
+          isLeft = false;
+          x1 = 0;
+          y1 += 120;
+        }else{
+          isLeft = true;
+          x1 = ((120 * 6) as num).toDouble()  ;
+        }
+        
+       }else{
+        //last row 
+        if(index ==  (imageInfos.length - maxColumn ) + 1){
+          row++;
+          x1 = 0;
+          y1 += 120;
+        
+        }else{
+           x1 +=  120;
+
+        }
+       } 
+
+      print('Vector2 Int(-$x1 , $y1 );');
+
       
+      
+      final spriteInfo = Sprite(imageInfo,srcPosition:Vector2(0,0),srcSize: Vector2(  120 ,y1 + 120));
+      final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1*scaleValue, y1*scaleValue),scale: Vector2(scaleValue,scaleValue));
+    
       return spriteComponent;
     }).toList();
  
