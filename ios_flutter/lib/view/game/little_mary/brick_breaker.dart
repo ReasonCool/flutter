@@ -25,42 +25,20 @@ class BrickBreaker extends FlameGame {
     super.onLoad();
 
 
-camera.viewfinder.anchor = Anchor.topLeft;
+  camera.viewfinder.anchor = Anchor.topLeft;
 
-    world.add(PlayArea());
+  world.add(PlayArea());
 
-
-final spriteComponents = await createPlayTable();
-    
+  
+  final spriteInfos = await createSpriteInfos(tablePath,tableNames );
+  final spriteComponents =   createPlayTablePosition(spriteInfos);
 
   spriteComponents.forEach((item)=> world.add(item)); 
 
-  }
+}
 
-  Future< List<SpriteComponent>> createPlayTable() async{
-        final tablePath = 'resource/images/little_mary/table/';
-    //final tableNames = [  'bar', 'bar25', 'bar50', 'bell'  ];
-    final tableNames = [
-       'orange','bell','bar50','bar','bar25','apple','melon',
-       'bell_multiple_2', 'water_melon',
-       'apple','water_melon_multiple_2',
-       'once_more', 'once_more', 
-       'star_multiple_2', 'apple',
-       'star','orange_multiple_2',
-       'melon','melon_multiple_2','apple','seven','seven_multiple_2','bell','orange',
-    ];
-    // final tableNames = [
-    //   'apple', 'bar', 'bar25', 'bar50', 'bell','bell_multiple_2', 'melon',
-    //   'melon_multiple_2', 'once_more', , 'orange_multiple_2', 'seven',
-    //   'seven_multiple_2', 'star', 'star_multiple_2', 'water_melon', 'water_melon_multiple_2'
-    // ];
-    //bell_multiple_2.png
-//"assets/images/resource/images/little_mary/table/bell_multiple_2.png
-    // Corrected solution:
-    List<String> tablePaths = tableNames.map((name) => '$tablePath$name.png').toList();
+List<SpriteComponent> createPlayTablePosition(List<Sprite> spriteInfos){
 
-  final imageInfos = await images.loadAll(tablePaths);
- 
    double x1 = 0;
    double y1 = 0;
    double scaleValue = (820/7)/120;
@@ -71,7 +49,8 @@ final spriteComponents = await createPlayTable();
    int maxColumn = 7;
     
    
-   return imageInfos.map((imageInfo){  
+   return spriteInfos.map((spriteInfo){  
+     
       index ++;
        if(index <= maxColumn   ){
         row = 1;
@@ -80,7 +59,7 @@ final spriteComponents = await createPlayTable();
         }
        
         y1 = 0;
-       }else if(index <= (imageInfos.length - maxColumn )){
+       }else if(index <= (spriteInfos.length - maxColumn )){
         if(isLeft == true){
           row++;
           isLeft = false;
@@ -93,7 +72,7 @@ final spriteComponents = await createPlayTable();
         
        }else{
         //last row 
-        if(index ==  (imageInfos.length - maxColumn ) + 1){
+        if(index ==  (spriteInfos.length - maxColumn ) + 1){
           row++;
           x1 = 0;
           y1 += 120;
@@ -104,14 +83,29 @@ final spriteComponents = await createPlayTable();
         }
        } 
 
-      print('Vector2 Int(-$x1 , $y1 );');
-
       
       
-      final spriteInfo = Sprite(imageInfo,srcPosition:Vector2(0,0),srcSize: Vector2(  120 ,y1 + 120));
+      
+     
       final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1*scaleValue, y1*scaleValue),scale: Vector2(scaleValue,scaleValue));
     
       return spriteComponent;
     }).toList(); 
   }
+
+
+Future< List<Sprite>> createSpriteInfos(String tablePath,List<String> tableNames) async{
+
+    
+   
+    List<String> tablePaths = tableNames.map((name) => '$tablePath$name.png').toList();
+
+  final imageInfos = await images.loadAll(tablePaths);
+
+  return imageInfos.map((imageInfo){  
+    return Sprite(imageInfo,srcPosition:Vector2(0,0),srcSize: Vector2(  120 ,  120));
+  }).toList();
+  }
+ 
+  
 }
