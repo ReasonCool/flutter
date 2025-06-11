@@ -29,7 +29,16 @@ camera.viewfinder.anchor = Anchor.topLeft;
 
     world.add(PlayArea());
 
-    final tablePath = 'resource/images/little_mary/table/';
+
+final spriteComponents = await createPlayTable();
+    
+
+  spriteComponents.forEach((item)=> world.add(item)); 
+
+  }
+
+  Future< List<SpriteComponent>> createPlayTable() async{
+        final tablePath = 'resource/images/little_mary/table/';
     //final tableNames = [  'bar', 'bar25', 'bar50', 'bell'  ];
     final tableNames = [
        'orange','bell','bar50','bar','bar25','apple','melon',
@@ -62,7 +71,7 @@ camera.viewfinder.anchor = Anchor.topLeft;
    int maxColumn = 7;
     
    
-   final spriteComponents =  imageInfos.map((imageInfo){  
+   return imageInfos.map((imageInfo){  
       index ++;
        if(index <= maxColumn   ){
         row = 1;
@@ -103,12 +112,6 @@ camera.viewfinder.anchor = Anchor.topLeft;
       final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1*scaleValue, y1*scaleValue),scale: Vector2(scaleValue,scaleValue));
     
       return spriteComponent;
-    }).toList();
- 
-
-    
-
-  spriteComponents.forEach((item)=> world.add(item)); 
-
+    }).toList(); 
   }
 }
