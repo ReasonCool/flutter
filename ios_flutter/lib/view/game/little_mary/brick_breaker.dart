@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:ffi';
+import 'dart:ui';
 
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
@@ -7,6 +7,8 @@ import 'package:flame/game.dart';
 import 'components.dart';
 import 'config.dart';
 
+import 'color_text_sprite.dart';
+import 'betting_tap.dart';
  
 
 class BrickBreaker extends FlameGame {
@@ -40,16 +42,89 @@ class BrickBreaker extends FlameGame {
 
  playTableSpriteComponents.forEach((item)=> world.add(item)); 
 
- startPosition.y += 30;
+final bettingColorData = createBettingTextSprite(bettingTexts, startPosition);
+ final  bettingColorComponents =   bettingColorData.$1;
+startPosition =  bettingColorData.$2;
+bettingColorComponents.forEach((item)=> world.add(item)); 
 
  final bettingSpriteInfos = await createSpriteInfos(bettingItemPath, bettingItemNames);
  final bettingInfos =   createBettingPosition(bettingSpriteInfos,startPosition);
   final bettingSpriteComponents =   bettingInfos.$1;
- startPosition =  playTableInfos.$2;
+  print('bett1 $startPosition');
+ startPosition =  bettingInfos.$2;
 
   bettingSpriteComponents.forEach((item)=> world.add(item)); 
+print('bett2 $startPosition');
+//startPosition.y  += 120;
+final bettingData = createBettingTapEditSprite(bettingValues, startPosition);
+final  bettingComponents =   bettingData.$1;
+startPosition =  bettingData.$2;
+bettingComponents.forEach((item)=> world.add(item)); 
+
+
+ 
+
+
+  
+
+
+
+ 
 
 }
+
+
+(List<ColoredTapTextSprite>,Vector2) createBettingTapEditSprite(List<String> bettingStrInfos,Vector2 startPosition){
+
+double x1 = startPosition.x;
+   double y1 = startPosition.y;
+    Vector2 endPosition = Vector2(x1, y1);
+    double maxWidth = gameWidth-startPosition.x-startPosition.x;
+   int maxColumn = 8;
+   double widthValue = 120;
+   double scaleValue = (maxWidth/maxColumn)/widthValue; 
+
+  final coloredSprite =  bettingStrInfos.map((bettingTxt){ 
+
+
+  final sprite = ColoredTapTextSprite(backgroundColor: Color.fromARGB(255, 148, 132, 171), 
+    colorSize: Vector2(widthValue*scaleValue ,widthValue*scaleValue),position: Vector2(x1, y1));
+  
+     
+    
+    x1 += widthValue * scaleValue;
+    return sprite;
+  }).toList();
+
+    endPosition.x = startPosition.x;
+    endPosition.y +=  widthValue * scaleValue;;
+    return (coloredSprite,endPosition);
+}
+
+ 
+(List<ColoredTextSprite>,Vector2) createBettingTextSprite(List<String> bettingStrInfos,Vector2 startPosition){
+
+double x1 = startPosition.x;
+   double y1 = startPosition.y;
+    Vector2 endPosition = Vector2(x1, y1);
+    double maxWidth = gameWidth-startPosition.x-startPosition.x;
+   int maxColumn = 8;
+   double widthValue = 120;
+   double scaleValue = (maxWidth/maxColumn)/widthValue; 
+
+  final coloredSprite =  bettingStrInfos.map((bettingTxt){ 
+     
+    final sprite =  ColoredTextSprite(backgroundColor: const  Color(0xFF3366CC), 
+     text: bettingTxt,position: Vector2(x1, y1),colorSize:Vector2(widthValue * scaleValue, 50));
+    x1 += widthValue * scaleValue;
+    return sprite;
+  }).toList();
+
+    endPosition.x = startPosition.x;
+    endPosition.y +=  50;
+    return (coloredSprite,endPosition);
+}
+
 
 (List<SpriteComponent>,Vector2) createBettingPosition(List<Sprite> spriteInfos ,Vector2 startPosition){
 
@@ -77,7 +152,7 @@ class BrickBreaker extends FlameGame {
       return spriteComponent;
     }).toList(); 
     endPosition.x = startPosition.x;
-    endPosition.y =  widthValue*scaleValue;
+    endPosition.y +=  widthValue*scaleValue;
     return (spriteComponents,endPosition);
   }
 

@@ -23,4 +23,11 @@ const bettingItemNames = [
 ];
 
 
+const bettingTexts = [
+  '100','40','30','25','20','15','10','5',
+];
+const bettingValues = [
+  '00','00','00','00','00','00','00','00',
+];
+
  
