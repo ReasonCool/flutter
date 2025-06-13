@@ -16,6 +16,12 @@ class ColoredTextSprite extends PositionComponent {
     super.position 
   }) : super(size: colorSize);
 
+  late final TextComponent textComponent ;
+
+  editTextValue(String textStr){
+    textComponent.text = textStr;
+  }
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -27,7 +33,7 @@ class ColoredTextSprite extends PositionComponent {
     ));
     
     // Add text component
-    final textComponent = TextComponent(
+    textComponent = TextComponent(
       text: text,
       textRenderer: TextPaint(style: textStyle),
       anchor: Anchor.center,

@@ -10,15 +10,18 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
   int _counter;
   final TextStyle textStyle;
   final Vector2 colorSize;
+  final String itemId;
 
-  final void Function(int newValue)? onCounterChanged;
+  final bool Function(int newValue,String itemId)? onCounterChanged;
   
   late TextComponent textComponent;
   
   // 移除 EffectController 成员变量
   ColoredTapTextSprite({
+    required this.itemId,
     required this.backgroundColor,
     int initialValue = 0,
+
     required this.colorSize,
     this.textStyle = const TextStyle(
       color: Color.fromARGB(255, 232, 228, 228),
@@ -92,19 +95,23 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
 
   @override
   void onTapDown(TapDownEvent event) {
-    // 增加计数器
-    if(_counter == 20){
+
+    if(_counter >= 20){
       return;
     }
+     // 通知监听器
+    if (onCounterChanged != null) {
+      if (onCounterChanged!(_counter,itemId) == false){
+        return;
+      };
+    }
+    // 增加计数器
     _counter++;
     textComponent.text = _counter.toString();
 
     
 
-    // 通知监听器
-    if (onCounterChanged != null) {
-      onCounterChanged!(_counter);
-    }
+   
 
     // 标记事件已处理
     event.handled = true;
