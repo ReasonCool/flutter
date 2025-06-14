@@ -39,9 +39,11 @@ const BettingInfo = [
   'BOUNS-WIN','CREDIT',
 ];
 
- 
+  const lightColor_transparent = Color.fromARGB(0, 255, 255, 255);
+  const lightColor_selected = Color.fromARGB(100, 231, 0,0);
+  const lightColor_selected2 = Color.fromARGB(50, 231, 0,0);
 const lightColor_background = Color.fromARGB(255, 148, 132, 171);
-const lightColor_selected = Color.fromARGB(255, 231, 7, 89);
+
 
 const tableItemKey = [
        1,2,3,4,5,6,7,24,8,23,9,22,10,21,11,20,12,19,18,17,16,15,14,13,

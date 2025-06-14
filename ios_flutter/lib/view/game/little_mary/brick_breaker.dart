@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
-
+import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
 
@@ -22,7 +22,8 @@ class BrickBreaker extends FlameGame {
 late final ColoredTextSprite creditCoinTextSprite;
   double get width => size.x;
   double get height => size.y;
-
+  int startIndex =1;
+  int lastIndex = 1;
    int bounsWinCoin = 0;
    int creditCoin = 100;
    late final  bettingInfo = Map<String ,int >();
@@ -59,9 +60,14 @@ void rightSideOnPressed(){
 }
 void startOnPressed(){
   print('startOnPressed');
-
+  final   random = Random();
+  lastIndex = random.nextInt(24);
+  print('startOnPressed lastIndex : $lastIndex ');
+   
   //執行動畫
-  lightRun(1, 22);
+  lightRun(startIndex,lastIndex);
+  startIndex = lastIndex;
+
 }
   
   @override
@@ -114,8 +120,8 @@ for (SpriteComponent item in playTableSpriteComponents) {
   print('item.position $pos');
 
   final rectang = RectangleComponent(
-      size: Vector2(20, 20),
-      paint: BasicPalette.transparent.paint()..color = lightColor_background ,
+      size: Vector2(120, 120),
+      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
       position: pos,
     );
   ligthData[itemId] = rectang;
@@ -183,7 +189,7 @@ bettingComponents.forEach((item)=> world.add(item));
 }
 
 
-  Future<void> lightRun(int startItemKey, int endItemKey) async {
+Future<void> lightRun(int startItemKey, int endItemKey) async {
   
     final firstSpeed = 80;
     final secondSpeed = 140;
@@ -194,40 +200,40 @@ bettingComponents.forEach((item)=> world.add(item));
         
     //run 2 
     for (int i = startItemKey ; i<= 24 ;i++){
-      ligthData[i]?.paint.color = const Color.fromARGB(255, 234, 3, 87);
+      ligthData[i]?.paint.color = lightColor_selected;
       // 间隔时间
        await Future.delayed(Duration(milliseconds: firstSpeed));
        if(i > 1){
-          ligthData[i-1]?.paint.color = const Color.fromARGB(255, 226, 26, 99);
+          ligthData[i-1]?.paint.color = lightColor_selected2;
           await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthData[i-1]?.paint.color = lightColor_background; 
+          ligthData[i-1]?.paint.color = lightColor_transparent; 
        }
        
        
     } 
-     ligthData[24]?.paint.color = lightColor_background; 
+     ligthData[24]?.paint.color = lightColor_transparent;
     for (int i = 1 ; i<= 24 ;i++){
-      ligthData[i]?.paint.color = const Color.fromARGB(255, 234, 3, 87);
+      ligthData[i]?.paint.color = lightColor_selected;
       // 间隔时间
        await Future.delayed(Duration(milliseconds: secondSpeed));
        if(i > 1){
-          ligthData[i-1]?.paint.color = const Color.fromARGB(255, 226, 26, 99);
+          ligthData[i-1]?.paint.color = lightColor_selected2;
           await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthData[i-1]?.paint.color = lightColor_background; 
+          ligthData[i-1]?.paint.color = lightColor_transparent; 
        }
        
        
     }
-     ligthData[24]?.paint.color = lightColor_background; 
+     ligthData[24]?.paint.color = lightColor_transparent;
      
     for (int i = 1 ; i<= endItemKey ;i++){
-      ligthData[i]?.paint.color = const Color.fromARGB(255, 234, 3, 87);
+      ligthData[i]?.paint.color = lightColor_selected;
       // 间隔时间
        await Future.delayed(Duration(milliseconds: lastSpeed));
        if(i > 1){
-          ligthData[i-1]?.paint.color = const Color.fromARGB(255, 226, 26, 99);
+          ligthData[i-1]?.paint.color = lightColor_selected2;
           await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthData[i-1]?.paint.color = lightColor_background; 
+          ligthData[i-1]?.paint.color = lightColor_transparent; 
        }
        
        
