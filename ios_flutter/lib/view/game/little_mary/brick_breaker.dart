@@ -37,8 +37,8 @@ late final ColoredTextSprite creditCoinTextSprite;
 
 
    }
-
   var ligthData = Map<int,RectangleComponent>();
+  var ligthAniData = Map<int,RectangleComponent>();
   //const controllValues = [
  // 'Exit','Win <->Credit','Left Side','Right Side','Start',
 //];
@@ -65,7 +65,7 @@ void startOnPressed(){
   print('startOnPressed lastIndex : $lastIndex ');
    
   //執行動畫
-  lightRun(startIndex,lastIndex);
+  lightAniRun(startIndex,lastIndex);
   startIndex = lastIndex;
 
 }
@@ -124,11 +124,23 @@ for (SpriteComponent item in playTableSpriteComponents) {
       paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
       position: pos,
     );
-  ligthData[itemId] = rectang;
+  ligthAniData[itemId] = rectang;
+
+   final rectang1 = RectangleComponent(
+      size: Vector2(20, 20),
+      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
+      position: pos,
+    );
+  ligthData[itemId] = rectang1;
   
 
 };
 
+print('lightAniData ${ligthAniData.length}');
+ligthAniData.values.forEach((item){
+  print('lightAniData12 ${item.position}');
+  world.add(item);
+});
 print('lightData ${ligthData.length}');
 ligthData.values.forEach((item){
   print('lightData12 ${item.position}');
@@ -189,7 +201,7 @@ bettingComponents.forEach((item)=> world.add(item));
 }
 
 
-Future<void> lightRun(int startItemKey, int endItemKey) async {
+Future<void> lightAniRun(int startItemKey, int endItemKey) async {
   
     final firstSpeed = 80;
     final secondSpeed = 140;
@@ -200,44 +212,48 @@ Future<void> lightRun(int startItemKey, int endItemKey) async {
         
     //run 2 
     for (int i = startItemKey ; i<= 24 ;i++){
-      ligthData[i]?.paint.color = lightColor_selected;
+      ligthAniData[i]?.paint.color = lightColor_ani1;
       // 间隔时间
        await Future.delayed(Duration(milliseconds: firstSpeed));
        if(i > 1){
-          ligthData[i-1]?.paint.color = lightColor_selected2;
+          ligthAniData[i-1]?.paint.color = lightColor_ani2;
           await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthData[i-1]?.paint.color = lightColor_transparent; 
+          ligthAniData[i-1]?.paint.color = lightColor_transparent; 
        }
        
        
     } 
-     ligthData[24]?.paint.color = lightColor_transparent;
+     ligthAniData[24]?.paint.color = lightColor_transparent;
     for (int i = 1 ; i<= 24 ;i++){
-      ligthData[i]?.paint.color = lightColor_selected;
+      ligthAniData[i]?.paint.color = lightColor_ani1;
       // 间隔时间
        await Future.delayed(Duration(milliseconds: secondSpeed));
        if(i > 1){
-          ligthData[i-1]?.paint.color = lightColor_selected2;
+          ligthAniData[i-1]?.paint.color = lightColor_ani2;
           await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthData[i-1]?.paint.color = lightColor_transparent; 
+          ligthAniData[i-1]?.paint.color = lightColor_transparent; 
        }
        
        
     }
-     ligthData[24]?.paint.color = lightColor_transparent;
+     ligthAniData[24]?.paint.color = lightColor_transparent;
      
     for (int i = 1 ; i<= endItemKey ;i++){
-      ligthData[i]?.paint.color = lightColor_selected;
+      ligthAniData[i]?.paint.color = lightColor_ani1;
       // 间隔时间
        await Future.delayed(Duration(milliseconds: lastSpeed));
        if(i > 1){
-          ligthData[i-1]?.paint.color = lightColor_selected2;
+          ligthAniData[i-1]?.paint.color = lightColor_ani2;
           await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthData[i-1]?.paint.color = lightColor_transparent; 
+          ligthAniData[i-1]?.paint.color = lightColor_transparent; 
        }
        
        
     }
+    
+    ligthData[endItemKey]?.paint.color = lightColor_selected;
+    await Future.delayed(Duration(milliseconds: cancelSpeed));
+    ligthAniData[endItemKey]?.paint.color = lightColor_transparent;
   }
   
 

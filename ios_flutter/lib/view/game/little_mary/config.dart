@@ -40,8 +40,9 @@ const BettingInfo = [
 ];
 
   const lightColor_transparent = Color.fromARGB(0, 255, 255, 255);
-  const lightColor_selected = Color.fromARGB(100, 231, 0,0);
-  const lightColor_selected2 = Color.fromARGB(50, 231, 0,0);
+    const lightColor_selected = Color.fromARGB(100, 0, 255,0);
+  const lightColor_ani1 = Color.fromARGB(100, 231, 0,0);
+  const lightColor_ani2 = Color.fromARGB(50, 231, 0,0);
 const lightColor_background = Color.fromARGB(255, 148, 132, 171);
 
 
