@@ -11,6 +11,17 @@ import 'color_text_sprite.dart';
 import 'betting_tap.dart';
  import 'package:flame/palette.dart';
 import 'button_tap.dart';
+
+enum GameState{
+
+  waitBit(10),waitStartGame(20),startGame(25),waitDoubleGame(30),startDoubleGame(40);
+
+  const GameState(this.enumValue);
+
+  final int enumValue;
+}
+
+
 class BrickBreaker extends FlameGame {
   BrickBreaker()
     : super(
@@ -19,6 +30,7 @@ class BrickBreaker extends FlameGame {
           height: gameHeight,
         ),
       );
+GameState gameState = GameState.waitBit;
 late final ColoredTextSprite creditCoinTextSprite;
   double get width => size.x;
   double get height => size.y;
@@ -29,10 +41,15 @@ late final ColoredTextSprite creditCoinTextSprite;
    late final  bettingInfo = Map<String ,int >();
    bool  editBetting(int betCoint,String betStr){
     print('editBetting betStr: $betStr, betCoint:$betCoint  creditCoin: $creditCoin');
+    if((gameState != GameState.waitBit) && (gameState != GameState.waitStartGame)){
+      return false;
+    }
     if(creditCoin == 0) return false;
+
     creditCoin -= 1;
      creditCoinTextSprite.editTextValue(creditCoin.toString());
      bettingInfo[betStr] = betCoint;
+     gameState = GameState.waitStartGame;
     return true;
 
 
@@ -44,21 +61,41 @@ late final ColoredTextSprite creditCoinTextSprite;
 //];
 
 void exchangeOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
   print('exchangeOnPressed');
 }
 void winOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
   print('winOnPressed');
 }
 void creditOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
   print('creditOnPressed');
 }
 void leftSideOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
   print('leftSideOnPressed');
 }
 void rightSideOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
   print('rightSideOnPressed');
 }
 void startOnPressed(){
+  if(gameState != GameState.waitStartGame){
+    return;
+  }
+
+  gameState = GameState.startGame;
   print('startOnPressed');
   final   random = Random();
   lastIndex = random.nextInt(24);
@@ -66,10 +103,29 @@ void startOnPressed(){
    
   //執行動畫
   lightAniRun(startIndex,lastIndex);
-  startIndex = lastIndex;
+  
+
 
 }
   
+void spacelGame(int startPoint){
+  final   random = Random();
+  if( random.nextInt(10) == 5){
+    //run age
+    final   random = Random();
+  lastIndex = random.nextInt(24);
+    lightAniRun(startPoint, lastIndex);
+
+  }else{
+    //顯示贏得的金額
+    
+    //等待玩家進行比大小
+
+
+  }
+
+}
+
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
@@ -204,9 +260,9 @@ bettingComponents.forEach((item)=> world.add(item));
 Future<void> lightAniRun(int startItemKey, int endItemKey) async {
   
     final firstSpeed = 80;
-    final secondSpeed = 140;
+    final secondSpeed = 100;
     
-    final lastSpeed = 200;
+    final lastSpeed = 140;
     final cancelSpeed = 50;
     int j = 0;
         
@@ -254,6 +310,14 @@ Future<void> lightAniRun(int startItemKey, int endItemKey) async {
     ligthData[endItemKey]?.paint.color = lightColor_selected;
     await Future.delayed(Duration(milliseconds: cancelSpeed));
     ligthAniData[endItemKey]?.paint.color = lightColor_transparent;
+
+    print('finish lightAniRun');
+    startIndex = lastIndex;
+    
+     
+    spacelGame(startIndex);
+     
+
   }
   
 
