@@ -33,7 +33,7 @@ const bettingValues = [
 ];
 
 const controllValues = [
-  'Exit','Win <->Credit','Double in Bet','Start',
+ 'Exchange','Win', 'Credit','Left Side','Right Side','Start',
 ];
 const BettingInfo = [
   'BOUNS-WIN','CREDIT',
@@ -44,6 +44,6 @@ const lightColor_background = Color.fromARGB(255, 148, 132, 171);
 const lightColor_selected = Color.fromARGB(255, 231, 7, 89);
 
 const tableItemKey = [
-       1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24
+       1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,
     ];
  

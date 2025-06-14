@@ -10,7 +10,7 @@ import 'config.dart';
 import 'color_text_sprite.dart';
 import 'betting_tap.dart';
  import 'package:flame/palette.dart';
-import 'package:flutter/painting.dart';
+import 'button_tap.dart';
 class BrickBreaker extends FlameGame {
   BrickBreaker()
     : super(
@@ -35,11 +35,39 @@ late final ColoredTextSprite creditCoinTextSprite;
 
 
    }
+
   var ligthData = Map<int,RectangleComponent>();
   
   
+  lightRun(int startItemKey,int endItemKey){
+    //run 2
+    for (int i = startItemKey ; i<= endItemKey ;i++){
+      ligthData[i]?.paint.color = lightColor_selected;
+    }
+  }
   
-  
+  //const controllValues = [
+ // 'Exit','Win <->Credit','Left Side','Right Side','Start',
+//];
+
+void exchangeOnPressed(){
+  print('exchangeOnPressed');
+}
+void winOnPressed(){
+  print('winOnPressed');
+}
+void creditOnPressed(){
+  print('creditOnPressed');
+}
+void leftSideOnPressed(){
+  print('leftSideOnPressed');
+}
+void rightSideOnPressed(){
+  print('rightSideOnPressed');
+}
+void startOnPressed(){
+  print('startOnPressed');
+}
   
   @override
   FutureOr<void> onLoad() async {
@@ -138,11 +166,42 @@ bettingComponents.forEach((item)=> world.add(item));
 
 //controller ui
 
- 
+//  添加一个自定义的HUD按钮，位置在屏幕右上角  'Exit','Win', 'Credit','Left Side','Right Side','Start',
+
+   startPosition.y += 20;
+  world.add(createControllButton(controllValues[0],controllValues[0], startPosition, Vector2(120, 120), exchangeOnPressed));
+  startPosition.x +=  130;
+  world.add(createControllButton(controllValues[1],controllValues[0], startPosition, Vector2(120, 120), winOnPressed));
+  startPosition.x +=  130;
+  world.add(createControllButton(controllValues[2],controllValues[0], startPosition, Vector2(120, 120), creditOnPressed));
+  startPosition.x +=  130;
+  world.add(createControllButton(controllValues[3],controllValues[0], startPosition, Vector2(120, 120), leftSideOnPressed));
+  startPosition.x +=  130;
+  world.add(createControllButton(controllValues[4],controllValues[0], startPosition, Vector2(120, 120), rightSideOnPressed));
+  startPosition.x +=  130;
+  world.add(createControllButton(controllValues[5],controllValues[0], startPosition, Vector2(120, 120), startOnPressed));
+
+
+
+    
 
 }
 
+HudCustomButton createControllButton(String title,String buttonId,Vector2 buttonPosition,Vector2 buttonSize,
+void Function() onButtonPressed){
+   final button = HudCustomButton(
+      onPressed: () {
+          onButtonPressed();
+      } ,
+      titleStr: title,
+      size: buttonSize,
+      position: buttonPosition, // 屏幕右上角，留出20像素的上边距
+    );
 
+  return button;
+  
+
+}
 
 (List<ColoredTapTextSprite>,Vector2) createBettingTapEditSprite(List<String> bettingStrInfos,Vector2 startPosition,
 bool Function(int newValue,String itemName) onTapCounterChanged){
