@@ -25,24 +25,27 @@ late final ColoredTextSprite creditCoinTextSprite;
 
    int bounsWinCoin = 0;
    int creditCoin = 100;
-  
+   late final Map<String ,int > bettingInfo;
    bool  editBetting(int betCoint,String betStr){
     print('editBetting betStr: $betStr, betCoint:$betCoint  creditCoin: $creditCoin');
     if(creditCoin == 0) return false;
     creditCoin -= 1;
      creditCoinTextSprite.editTextValue(creditCoin.toString());
+     bettingInfo[betStr] = betCoint;
     return true;
 
 
    }
 
   var ligthData = Map<int,RectangleComponent>();
+  Future<void> lightRun(int startItemKey, int endItemKey) async {
   
-  
-  lightRun(int startItemKey,int endItemKey){
+   
     //run 2
     for (int i = startItemKey ; i<= endItemKey ;i++){
       ligthData[i]?.paint.color = lightColor_selected;
+      // 间隔时间
+       await Future.delayed(Duration(milliseconds: 1110));
     }
   }
   
@@ -67,6 +70,9 @@ void rightSideOnPressed(){
 }
 void startOnPressed(){
   print('startOnPressed');
+
+  //執行動畫
+  lightRun(1, 12);
 }
   
   @override
