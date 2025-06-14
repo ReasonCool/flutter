@@ -25,7 +25,7 @@ late final ColoredTextSprite creditCoinTextSprite;
 
    int bounsWinCoin = 0;
    int creditCoin = 100;
-   late final Map<String ,int > bettingInfo;
+   late final  bettingInfo = Map<String ,int >();
    bool  editBetting(int betCoint,String betStr){
     print('editBetting betStr: $betStr, betCoint:$betCoint  creditCoin: $creditCoin');
     if(creditCoin == 0) return false;
@@ -38,17 +38,6 @@ late final ColoredTextSprite creditCoinTextSprite;
    }
 
   var ligthData = Map<int,RectangleComponent>();
-  Future<void> lightRun(int startItemKey, int endItemKey) async {
-  
-   
-    //run 2
-    for (int i = startItemKey ; i<= endItemKey ;i++){
-      ligthData[i]?.paint.color = lightColor_selected;
-      // 间隔时间
-       await Future.delayed(Duration(milliseconds: 1110));
-    }
-  }
-  
   //const controllValues = [
  // 'Exit','Win <->Credit','Left Side','Right Side','Start',
 //];
@@ -72,7 +61,7 @@ void startOnPressed(){
   print('startOnPressed');
 
   //執行動畫
-  lightRun(1, 12);
+  lightRun(1, 22);
 }
   
   @override
@@ -192,6 +181,59 @@ bettingComponents.forEach((item)=> world.add(item));
     
 
 }
+
+
+  Future<void> lightRun(int startItemKey, int endItemKey) async {
+  
+    final firstSpeed = 80;
+    final secondSpeed = 140;
+    
+    final lastSpeed = 200;
+    final cancelSpeed = 50;
+    int j = 0;
+        
+    //run 2 
+    for (int i = startItemKey ; i<= 24 ;i++){
+      ligthData[i]?.paint.color = const Color.fromARGB(255, 234, 3, 87);
+      // 间隔时间
+       await Future.delayed(Duration(milliseconds: firstSpeed));
+       if(i > 1){
+          ligthData[i-1]?.paint.color = const Color.fromARGB(255, 226, 26, 99);
+          await Future.delayed(Duration(milliseconds: cancelSpeed));
+          ligthData[i-1]?.paint.color = lightColor_background; 
+       }
+       
+       
+    } 
+     ligthData[24]?.paint.color = lightColor_background; 
+    for (int i = 1 ; i<= 24 ;i++){
+      ligthData[i]?.paint.color = const Color.fromARGB(255, 234, 3, 87);
+      // 间隔时间
+       await Future.delayed(Duration(milliseconds: secondSpeed));
+       if(i > 1){
+          ligthData[i-1]?.paint.color = const Color.fromARGB(255, 226, 26, 99);
+          await Future.delayed(Duration(milliseconds: cancelSpeed));
+          ligthData[i-1]?.paint.color = lightColor_background; 
+       }
+       
+       
+    }
+     ligthData[24]?.paint.color = lightColor_background; 
+     
+    for (int i = 1 ; i<= endItemKey ;i++){
+      ligthData[i]?.paint.color = const Color.fromARGB(255, 234, 3, 87);
+      // 间隔时间
+       await Future.delayed(Duration(milliseconds: lastSpeed));
+       if(i > 1){
+          ligthData[i-1]?.paint.color = const Color.fromARGB(255, 226, 26, 99);
+          await Future.delayed(Duration(milliseconds: cancelSpeed));
+          ligthData[i-1]?.paint.color = lightColor_background; 
+       }
+       
+       
+    }
+  }
+  
 
 HudCustomButton createControllButton(String title,String buttonId,Vector2 buttonPosition,Vector2 buttonSize,
 void Function() onButtonPressed){
