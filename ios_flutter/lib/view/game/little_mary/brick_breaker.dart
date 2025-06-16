@@ -51,6 +51,20 @@ GameState gameState = GameState.waitBit;
 late final ColoredTextSprite creditCoinTextSprite;
 late final ColoredTextSprite winCoinTextSprite;
 late final List<ColoredTapTextSprite> bettingComponents;
+
+
+late final exchangeBtn ;
+
+late final winBtn;
+
+late final creditBtn;
+
+late final leftSideBtn;
+   
+late final rightSideBtn;
+   
+late final  startBtn ;
+
   double get width => size.x;
   double get height => size.y;
   int startIndex =1;
@@ -244,6 +258,7 @@ specialModel(){
 
 }
 showLeftRight()async{
+  final leftRightSpeed = 400;
   final leftItems = [1,2,3,4,24,23,22,21,20,19,18,17,16];
   final rightItems = [4,5,6,7,8,9,10,11,12,13,14,15,16];
   //左右閃三次
@@ -260,6 +275,8 @@ showLeftRight()async{
         ligthAniData[j]?.paint.color =lightType;
         
       }
+      leftSideBtn.ChangeBGColor(lightType);
+
     if (i % 2 == 1) {
        lightType  = lightColor_transparent; 
     }else{
@@ -269,10 +286,10 @@ showLeftRight()async{
         ligthAniData[j]?.paint.color = lightType; 
         
       }
-      await Future.delayed(Duration(milliseconds: 200)); 
+      await Future.delayed(Duration(milliseconds: leftRightSpeed)); 
        
     } 
-
+      rightSideBtn.ChangeBGColor(lightType);
      lightType  = lightColor_transparent; 
       for (int j in leftItems){
         ligthAniData[j]?.paint.color =lightType;
@@ -282,6 +299,8 @@ showLeftRight()async{
         ligthAniData[k]?.paint.color = lightType; 
         
       }
+        leftSideBtn.ChangeBGColor( lightColor_ani1);
+        rightSideBtn.ChangeBGColor( lightColor_ani1);
 }
 
 WinInfo? createWinItem(isSpecialModel){
@@ -450,17 +469,34 @@ bettingComponents.forEach((item)=> world.add(item));
 //  添加一个自定义的HUD按钮，位置在屏幕右上角  'Exit','Win', 'Credit','Left Side','Right Side','Start',
 
    startPosition.y += 20;
-  world.add(createControllButton(controllValues[0],controllValues[0], startPosition, Vector2(120, 120), exchangeOnPressed));
-  startPosition.x +=  130;
-  world.add(createControllButton(controllValues[1],controllValues[0], startPosition, Vector2(120, 120), winOnPressed));
-  startPosition.x +=  130;
-  world.add(createControllButton(controllValues[2],controllValues[0], startPosition, Vector2(120, 120), creditOnPressed));
-  startPosition.x +=  130;
-  world.add(createControllButton(controllValues[3],controllValues[0], startPosition, Vector2(120, 120), leftSideOnPressed));
-  startPosition.x +=  130;
-  world.add(createControllButton(controllValues[4],controllValues[0], startPosition, Vector2(120, 120), rightSideOnPressed));
-  startPosition.x +=  130;
-  world.add(createControllButton(controllValues[5],controllValues[0], startPosition, Vector2(120, 120), startOnPressed));
+ exchangeBtn = createControllButton(controllValues[0],controllValues[0], startPosition, Vector2(120, 120), exchangeOnPressed);
+ startPosition.x +=  130;
+winBtn= createControllButton(controllValues[1],controllValues[0], startPosition, Vector2(120, 120), winOnPressed);
+ startPosition.x +=  130;
+ creditBtn  = createControllButton(controllValues[2],controllValues[0], startPosition, Vector2(120, 120), creditOnPressed);
+ startPosition.x +=  130;
+leftSideBtn =  createControllButton(controllValues[3],controllValues[0], startPosition, Vector2(120, 120), leftSideOnPressed);
+    startPosition.x +=  130;
+ rightSideBtn =   createControllButton(controllValues[4],controllValues[0], startPosition, Vector2(120, 120), rightSideOnPressed);
+    startPosition.x +=  130;
+  startBtn =   createControllButton(controllValues[5],controllValues[0], startPosition, Vector2(120, 120), startOnPressed);
+
+
+
+  
+  world.add(exchangeBtn);
+ 
+  world.add(winBtn);
+   
+  world.add(creditBtn);
+ 
+  world.add(leftSideBtn);
+  
+  world.add(rightSideBtn);
+ 
+  world.add(startBtn);
+  
+  
 
 
 

@@ -13,14 +13,21 @@ class HudCustomButton extends PositionComponent with TapCallbacks {
     required Vector2 position,
   }) : super(size: size, position: position);
 
+
+  late final bgComponent = RectangleComponent(
+      size: size ,
+      paint: Paint()..color = Colors.blue,
+    );
+  
+  ChangeBGColor (Color bgColor){
+    bgComponent.paint.color = bgColor;
+  }
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
     // 添加一个背景
-    add(RectangleComponent(
-      size: size ,
-      paint: Paint()..color = Colors.blue,
-    ));
+    add(bgComponent);
     add(RectangleComponent(
       size: size * 0.8,
       paint: Paint()..color = Colors.blueGrey,
