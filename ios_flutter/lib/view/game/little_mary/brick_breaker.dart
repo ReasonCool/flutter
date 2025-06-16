@@ -128,12 +128,16 @@ void leftSideOnPressed(){
     return;
   }
   print('leftSideOnPressed');
+   startLeftRighGame(true);
+  
 }
+
 void rightSideOnPressed(){
    if(gameState != GameState.waitDoubleGame){
     return;
   }
   print('rightSideOnPressed');
+  startLeftRighGame(false);
 }
 void startOnPressed(){
   if(gameState != GameState.waitStartGame){
@@ -160,7 +164,7 @@ void startOnPressed(){
     //正常模式
     //執行動畫
      winInfos.add(winInfo);
-    lightAniRun(startIndex,winInfo.itemIndex,showWinCoin);
+    lightAniRun(startIndex,winInfo.itemIndex,showWinCoin_First);
   }
 
 
@@ -204,36 +208,51 @@ noceMore() async{
        
 } 
   
+showWinCoin_First()  {
+  showWinCoin(null);
+}
 
-showWinCoin()async{
-  //count win coint
-  int winCoin = 0;
+showWinCoin(bool? isDouble ) async {
+ int winCoin = 0;
+if(isDouble == true){
+  winCoin =  bounsWinCoin * 2;
+
+}else if(isDouble == false){
+  winCoin = 0;
+}else{
+  //if(isDouble == null){
+   //count win coint
+  
   print('showWinCoin winInfos.leght ${winInfos.length}');
   winInfos.forEach((item){
      winCoin += item.winCoin;
 
   });
-
+}
    //await creditCoinTextSprite.editTextValueAni(creditCoin -  bounsWinCoin );
 //清空押注項目的金額
  
   
   print("showWinCoin winCoin $winCoin");
-  if(winCoin > 0){
+  if(winCoin > 0 ){
+
     bounsWinCoin = winCoin;
     await winCoinTextSprite.editTextValueAni(bounsWinCoin.toString());
     //比大小遊戲 
-
-
     //顯示動畫
-
-    await showLeftRight();
+    if(isDouble == null){
+      await showWaitPlayLeftRightAni();
+    }
+    
 
     gameState = GameState.waitDoubleGame;  
 
 
 
   }else{
+    bounsWinCoin = 0;
+    winCoinTextSprite.editTextValue(bounsWinCoin.toString());
+
     gameState = GameState.waitBit;
   }
   for (var item in  bettingComponents){
@@ -254,16 +273,19 @@ showWinCoin()async{
 specialModel(){
      final winInfo = createWinItem(true)!;
       winInfos.add(winInfo);
-    lightAniRun(startIndex,createWinItem(true)!.itemIndex,showWinCoin);
+    lightAniRun(startIndex,createWinItem(true)!.itemIndex,showWinCoin_First);
 
-}
-showLeftRight()async{
-  final leftRightSpeed = 400;
-  final leftItems = [1,2,3,4,24,23,22,21,20,19,18,17,16];
-  final rightItems = [4,5,6,7,8,9,10,11,12,13,14,15,16];
-  //左右閃三次
+} 
+showLeftRight_LeftSige(bool isLeft)async {
+   //左右閃三次
+    
+
     var lightType  =  lightColor_transparent; 
-  for (int i = 1 ; i<= 6 ;i++){
+
+  int playTime = isLeft? 5: 6;
+  
+
+  for (int i = 1 ; i<=  playTime ;i++){
    
     if(i %2 ==1){
         lightType  =  lightColor_ani1;
@@ -271,31 +293,41 @@ showLeftRight()async{
        lightType  =   lightColor_transparent; 
     }
     
-      for (int j in leftItems){
+      for (int j in LeftRight_LeftItems  ){
         ligthAniData[j]?.paint.color =lightType;
         
       }
-      leftSideBtn.ChangeBGColor(lightType);
+     // leftSideBtn.ChangeBGColor(lightType);
 
     if (i % 2 == 1) {
        lightType  = lightColor_transparent; 
     }else{
        lightType  =  lightColor_ani1;
     }
-      for (int j in rightItems){
+      for (int j in LeftRight_RightItems){
         ligthAniData[j]?.paint.color = lightType; 
         
       }
-      await Future.delayed(Duration(milliseconds: leftRightSpeed)); 
+     //  rightSideBtn.ChangeBGColor(lightType);
+      await Future.delayed(Duration(milliseconds: LeftRight_Speed)); 
        
     } 
-      rightSideBtn.ChangeBGColor(lightType);
-     lightType  = lightColor_transparent; 
-      for (int j in leftItems){
+
+   
+
+    
+ 
+}
+showWaitPlayLeftRightAni()async{
+  
+    showLeftRight_LeftSige(true);
+     
+    var lightType  = lightColor_transparent; 
+      for (int j in LeftRight_LeftItems){
         ligthAniData[j]?.paint.color =lightType;
         
       }
-      for (int k in rightItems){
+      for (int k in LeftRight_RightItems){
         ligthAniData[k]?.paint.color = lightType; 
         
       }
@@ -355,8 +387,31 @@ WinInfo? createWinItem(isSpecialModel){
 
 
 
- 
+ startLeftRighGame(bool isLeft)async{
+  
+  final   random = Random();
+  if(random.nextInt(100)%2 == 1){
+    //left win
+    showLeftRightGameAni(true,isLeft);
+  }else{
+    //right win
+    showLeftRightGameAni(false,!isLeft);
+  }
+  
+}
+showLeftRightGameAni(isLeft,isWin){
+  showLeftRight_LeftSige(isLeft);
+  if(isWin == true){
+    //獎勵翻倍
+    showWinCoin(true);
+  }else{
+    //獎勵歸零
+    showWinCoin(false);
+  }
 
+
+
+}
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
@@ -505,7 +560,7 @@ leftSideBtn =  createControllButton(controllValues[3],controllValues[0], startPo
 }
 
 
-Future<void> lightAniRun(int startItemKey, int endItemKey ,void Function ()? nextStep) async {
+Future<void> lightAniRun(int startItemKey, int endItemKey ,void Function () nextStep) async {
   
     final firstSpeed = 80;
     final secondSpeed = 100;
