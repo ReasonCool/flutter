@@ -81,11 +81,21 @@ late final List<ColoredTapTextSprite> bettingComponents;
  // 'Exit','Win <->Credit','Left Side','Right Side','Start',
 //];
 
-void exchangeOnPressed(){
+void exchangeOnPressed() async{
    if(gameState != GameState.waitDoubleGame){
     return;
   }
   print('exchangeOnPressed');
+  //win  to credit
+  if(bounsWinCoin > 0){
+    
+    winCoinTextSprite.editTextValueAni('0');
+     creditCoin += bounsWinCoin;
+   await creditCoinTextSprite.editTextValueAni(creditCoin.toString());
+   gameState = GameState.waitBit;
+
+   
+  }
 }
 void winOnPressed(){
    if(gameState != GameState.waitDoubleGame){

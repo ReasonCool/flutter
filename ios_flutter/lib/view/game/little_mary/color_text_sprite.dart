@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 
 class ColoredTextSprite extends PositionComponent {
   final Color backgroundColor;
-  final String text;
+  String text;
   final TextStyle textStyle;
   final Vector2 colorSize;
   
@@ -19,8 +19,8 @@ class ColoredTextSprite extends PositionComponent {
   late final TextComponent textComponent ;
 
   editTextValue(String textStr){
-
-    textComponent.text = textStr;
+    text = textStr;
+    textComponent.text = text;
   }
   editTextValueAni(String textStr) async{
     final startNum = int.tryParse(text)??0 ;
@@ -29,14 +29,14 @@ class ColoredTextSprite extends PositionComponent {
     if(startNum < endNum){
      list = [for (var i = startNum; i <= endNum; i++) i];
     }else if(startNum > endNum){
-      list = [for (var i = startNum; i <= endNum; i--) i];
+      list = [for (var i = startNum; i >= endNum; i--) i];
     }
     for (var i in list){
       textComponent.text = i.toString();
-       await Future.delayed(Duration(milliseconds: 300));
+       await Future.delayed(Duration(milliseconds: 100));
     }
 
-    textComponent.text = textStr;
+     text = textStr;
   }
 
   @override
