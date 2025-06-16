@@ -19,6 +19,23 @@ class ColoredTextSprite extends PositionComponent {
   late final TextComponent textComponent ;
 
   editTextValue(String textStr){
+
+    textComponent.text = textStr;
+  }
+  editTextValueAni(String textStr) async{
+    final startNum = int.tryParse(text)??0 ;
+    final endNum =  int.tryParse(textStr)??0 ;
+    var list;
+    if(startNum < endNum){
+     list = [for (var i = startNum; i <= endNum; i++) i];
+    }else if(startNum > endNum){
+      list = [for (var i = startNum; i <= endNum; i--) i];
+    }
+    for (var i in list){
+      textComponent.text = i.toString();
+       await Future.delayed(Duration(milliseconds: 300));
+    }
+
     textComponent.text = textStr;
   }
 

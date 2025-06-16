@@ -2,6 +2,8 @@
  
 import 'dart:ui';
 
+import 'package:ios_flutter/view/game/little_mary/item.dart';
+
 const gameWidth = 820.0;
 const gameHeight = 1500.0;
 const itemWidth = gameWidth/7;
@@ -20,14 +22,19 @@ const tableNames = [
        'melon','melon_multiple_2','apple','seven','seven_multiple_2','bell','orange',
     ];
 const bettingItemPath = 'resource/images/little_mary/';
-const bettingItemNames = [
-  'bar','seven','star','water_melon','bell','melon','orange','apple',
-];
 
+enum LitttleMaryItemName   {
+ orange,bell,bar50,bar,bar25,apple,melon,
+       bell_multiple_2, water_melon,
+      water_melon_multiple_2,
+       once_more, 
+       star_multiple_2, 
+       star,orange_multiple_2,
+     seven,seven_multiple_2;
 
-const bettingTexts = [
-  '100','40','30','25','20','15','10','5',
-];
+}
+
+ 
 const bettingValues = [
   '00','00','00','00','00','00','00','00',
 ];
@@ -49,5 +56,50 @@ const lightColor_background = Color.fromARGB(255, 148, 132, 171);
 const tableItemKey = [
        1,2,3,4,5,6,7,24,8,23,9,22,10,21,11,20,12,19,18,17,16,15,14,13,
     ];
+class ItemInfo {
+  
+  final int randomValue;
+  final String betId;
+  final String itemName;
+  final int itemBettingMultiple;
+  const ItemInfo( this.randomValue,this.betId,this.itemName,this.itemBettingMultiple);
+} 
+
+const List<ItemInfo>tableItemInfo = [
+ // ItemInfo(1, 1, itemName, itemBettingMultiple)
+   
+      ItemInfo(1, 'orange','orange',10),
+      ItemInfo(2, 'bell', 'bell',20),
+      ItemInfo(3, 'bar', 'bar50',50),
+      ItemInfo(4,  'bar','bar',100),
+      ItemInfo(5, 'bar','bar25',25),
+      ItemInfo(6,   'apple','apple',5),
+      ItemInfo(7,  'melon', 'melon',15),
+      ItemInfo(24, 'bell', 'bell_multiple_2',40),
+      ItemInfo(8,   'water_melon', 'water_melon',25),
+      ItemInfo(23,  'apple', 'apple',5),
+      ItemInfo(9,  'water_melon', 'water_melon_multiple_2',50),
+      ItemInfo(22,  'once_more','once_more',0),
+      ItemInfo(10,  'once_more', 'once_more', 0),
+      ItemInfo(21,  'star', 'star_multiple_2',60),
+      ItemInfo(11,  'apple',  'apple',5),
+      ItemInfo(20,  'star', 'star',30),
+      ItemInfo(12, 'orange', 'orange_multiple_2',20),
+      ItemInfo(19,  'melon', 'melon',1),
+      ItemInfo(18,  'melon', 'melon_multiple_2',30),
+      ItemInfo(17,  'apple',  'apple',5),
+      ItemInfo(16,'seven', 'seven',40),
+      ItemInfo(15, 'seven', 'seven_multiple_2',80),
+      ItemInfo(14,'bell',  'bell',20),
+      ItemInfo(13,'orange','orange',10),
+    ];
+const bettingTexts = [
+  '100','40','30','25','20','15','10','5',
+];
+const bettingItemNames = [
+  'bar','seven','star','water_melon','bell','melon','orange','apple',
+];
+
+ 
  
  

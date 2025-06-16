@@ -40,6 +40,13 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
           size: colorSize,
         );
 
+
+  editTextValue(String textStr){
+    print('coloredTapTextSprite editTextValue  textStr : $textStr');
+    _counter = int.tryParse(textStr)!;
+    textComponent.text = _counter.toString();
+  }    
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
