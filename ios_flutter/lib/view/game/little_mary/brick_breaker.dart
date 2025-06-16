@@ -209,7 +209,16 @@ showWinCoin()async{
     bounsWinCoin = winCoin;
     await winCoinTextSprite.editTextValueAni(bounsWinCoin.toString());
     //比大小遊戲 
+
+
+    //顯示動畫
+
+    await showLeftRight();
+
     gameState = GameState.waitDoubleGame;  
+
+
+
   }else{
     gameState = GameState.waitBit;
   }
@@ -234,7 +243,46 @@ specialModel(){
     lightAniRun(startIndex,createWinItem(true)!.itemIndex,showWinCoin);
 
 }
+showLeftRight()async{
+  final leftItems = [1,2,3,4,24,23,22,21,20,19,18,17,16];
+  final rightItems = [4,5,6,7,8,9,10,11,12,13,14,15,16];
+  //左右閃三次
+    var lightType  =  lightColor_transparent; 
+  for (int i = 1 ; i<= 6 ;i++){
+   
+    if(i %2 ==1){
+        lightType  =  lightColor_ani1;
+    }else{
+       lightType  =   lightColor_transparent; 
+    }
+    
+      for (int j in leftItems){
+        ligthAniData[j]?.paint.color =lightType;
+        
+      }
+    if (i % 2 == 1) {
+       lightType  = lightColor_transparent; 
+    }else{
+       lightType  =  lightColor_ani1;
+    }
+      for (int j in rightItems){
+        ligthAniData[j]?.paint.color = lightType; 
+        
+      }
+      await Future.delayed(Duration(milliseconds: 200)); 
+       
+    } 
 
+     lightType  = lightColor_transparent; 
+      for (int j in leftItems){
+        ligthAniData[j]?.paint.color =lightType;
+        
+      }
+      for (int k in rightItems){
+        ligthAniData[k]?.paint.color = lightType; 
+        
+      }
+}
 
 WinInfo? createWinItem(isSpecialModel){
   WinInfo? winInfo ;
