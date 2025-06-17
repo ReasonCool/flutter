@@ -109,3 +109,29 @@ const bettingItemNames = [
   final LeftRight_LeftItems = [1,2,3,4,24,23,22,21,20,19,18,17,16];
   final LeftRight_RightItems = [4,5,6,7,8,9,10,11,12,13,14,15,16];
  
+
+
+enum GameState{
+
+  waitBit(10),waitStartGame(20),startGame(25),waitDoubleGame(30),startDoubleGame(40);
+
+  const GameState(this.enumValue);
+
+  final int enumValue;
+}
+
+class WinInfo{
+   
+  final int itemIndex;
+  final String winItemId;
+  final int bettingCoin;
+  final int winCoin;
+  const WinInfo(
+    
+     this.itemIndex,
+    this.winItemId,
+    this.bettingCoin,
+    this.winCoin
+    ); 
+
+}

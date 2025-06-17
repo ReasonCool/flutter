@@ -16,33 +16,11 @@ import 'button_tap.dart';
 
 import 'tableBg.dart';
 
- 
+import 'brick_breaker_model.dart';
+
+import 'brick_breaker_button.dart';
 
 
-enum GameState{
-
-  waitBit(10),waitStartGame(20),startGame(25),waitDoubleGame(30),startDoubleGame(40);
-
-  const GameState(this.enumValue);
-
-  final int enumValue;
-}
-
-class WinInfo{
-   
-  final int itemIndex;
-  final String winItemId;
-  final int bettingCoin;
-  final int winCoin;
-  const WinInfo(
-    
-     this.itemIndex,
-    this.winItemId,
-    this.bettingCoin,
-    this.winCoin
-    ); 
-
-}
 
 class BrickBreaker extends FlameGame {
   BrickBreaker()
@@ -81,144 +59,13 @@ late BackgroundAnimationSystem bgAnimationSystem;
    int creditCoin = 100;
    late List<WinInfo> winInfos =[];
    late final  bettingInfo = Map<String ,int >();
-   bool  editBetting(int betCoint,String betStr){
-    print('editBetting betStr: $betStr, betCoint:$betCoint  creditCoin: $creditCoin');
-    if((gameState != GameState.waitBit) && (gameState != GameState.waitStartGame)){
-      return false;
-    }
-    if(creditCoin == 0) return false;
-
-    creditCoin -= 1;
-     creditCoinTextSprite.editTextValue(creditCoin.toString());
-     betCoint++;
-     bettingInfo[betStr] = betCoint;
-     gameState = GameState.waitStartGame;
-    return true;
-
-
-   }
+   
   var ligthData = Map<int,RectangleComponent>();
   var ligthAniData = Map<int,RectangleComponent>();
   //const controllValues = [
  // 'Exit','Win <->Credit','Left Side','Right Side','Start',
-//];
+//]; 
 
-void exchangeOnPressed() async{
-   if(gameState != GameState.waitDoubleGame){
-    return;
-  }
-  print('exchangeOnPressed');
-  //win  to credit
-  if(bounsWinCoin > 0){
-    
-    winCoinTextSprite.editTextValueAni('0');
-     creditCoin += bounsWinCoin;
-   await creditCoinTextSprite.editTextValueAni(creditCoin.toString());
-   gameState = GameState.waitBit;
-
-   
-  }
-}
-void winOnPressed(){
-   if(gameState != GameState.waitDoubleGame){
-    return;
-  }
-  print('winOnPressed');
-}
-void creditOnPressed(){
-   if(gameState != GameState.waitDoubleGame){
-    return;
-  }
-  print('creditOnPressed');
-}
-void leftSideOnPressed(){
-   if(gameState != GameState.waitDoubleGame){
-    return;
-  }
-  print('leftSideOnPressed');
-   startLeftRighGame(true);
-  
-}
-
-void rightSideOnPressed(){
-   if(gameState != GameState.waitDoubleGame){
-    return;
-  }
-  print('rightSideOnPressed');
-  startLeftRighGame(false);
-}
-void startOnPressed(){
-  if(gameState != GameState.waitStartGame){
-    return;
-  }
-  winInfos.clear();
-
-  gameState = GameState.startGame;
-  
-  WinInfo? winInfo = createWinItem(false);
-  if(winInfo == null){
-    //特殊模式
-     winInfo = createWinItem(true)!;
-      winInfos.add(winInfo);
-     lightAniRun(startIndex,winInfo.itemIndex,specialModel);
-
-
-  }else if( winInfo.winItemId == LitttleMaryItemName.once_more.name){
-    winInfos.add(winInfo);
-    //once more
-    //執行動畫
-    lightAniRun(startIndex,winInfo.itemIndex,noceMore);
-  }else{
-    //正常模式
-    //執行動畫
-     winInfos.add(winInfo);
-    lightAniRun(startIndex,winInfo.itemIndex,showWinCoin_First);
-  }
-
-
-}
-noceMore() async{
-  //two noce more light is light 
-    //run 2 
-    List<ItemInfo> onceMores =  [];
-     tableItemInfo.map((item){
-          if(item.itemName == 'onceMore' ){
-            onceMores.add(item);
-         };
-       });
-
-    if (onceMores.length == 2 ){
-        ligthAniData[onceMores[0].randomValue]?.paint.color = lightColor_ani1;
-         ligthAniData[onceMores[1].randomValue]?.paint.color = lightColor_ani1;
-          await Future.delayed(Duration(milliseconds: 300));
-        ligthAniData[onceMores[0].randomValue]?.paint.color = lightColor_transparent; 
-         ligthAniData[onceMores[1].randomValue]?.paint.color =lightColor_transparent; 
-         await Future.delayed(Duration(milliseconds: 300));
-         ligthAniData[onceMores[0].randomValue]?.paint.color = lightColor_ani1;
-         ligthAniData[onceMores[1].randomValue]?.paint.color = lightColor_ani1;
-          await Future.delayed(Duration(milliseconds: 300));
-           ligthAniData[onceMores[0].randomValue]?.paint.color = lightColor_ani1;
-         ligthAniData[onceMores[1].randomValue]?.paint.color = lightColor_ani1;
-          await Future.delayed(Duration(milliseconds: 300));
-        ligthAniData[onceMores[0].randomValue]?.paint.color = lightColor_transparent; 
-         ligthAniData[onceMores[1].randomValue]?.paint.color =lightColor_transparent; 
-         await Future.delayed(Duration(milliseconds: 300));
-         ligthAniData[onceMores[0].randomValue]?.paint.color = lightColor_ani1;
-         ligthAniData[onceMores[1].randomValue]?.paint.color = lightColor_ani1;
-          await Future.delayed(Duration(milliseconds: 300));
-
-
-    }
-     
-   //start button can tap
-    gameState = GameState.waitStartGame;
-       
-       
-} 
-  
-showWinCoin_First()  {
-  showWinCoin(null);
-}
 
 showWinCoin(bool? isDouble ) async {
  int winCoin = 0;
@@ -239,8 +86,6 @@ if(isDouble == true){
 }
    //await creditCoinTextSprite.editTextValueAni(creditCoin -  bounsWinCoin );
 //清空押注項目的金額
- 
-  
   print("showWinCoin winCoin $winCoin");
   if(winCoin > 0 ){
 
@@ -250,13 +95,9 @@ if(isDouble == true){
     //顯示動畫
     if(isDouble == null){
       await showWaitPlayLeftRightAni();
-    }
-    
-
+    } 
     gameState = GameState.waitDoubleGame;  
-
-
-
+ 
   }else{
     bounsWinCoin = 0;
     winCoinTextSprite.editTextValue(bounsWinCoin.toString());
@@ -266,69 +107,26 @@ if(isDouble == true){
   for (var item in  bettingComponents){
      print("bettingComponents.map");
     item.editTextValue("0");
-  };
-
- 
- 
-
-
-
-
-
-
-
+  } 
 }
+
 specialModel(){
+  
      final winInfo = createWinItem(true)!;
       winInfos.add(winInfo);
-    lightAniRun(startIndex,createWinItem(true)!.itemIndex,showWinCoin_First);
+    lightAniRun(ligthData,ligthAniData,startIndex,createWinItem(true)!.itemIndex,(){
+      startIndex = lastIndex;
+      showWinCoin_First();
+      });
+    
 
 } 
-showLeftRight_LeftSige(bool isLeft)async {
-   //左右閃三次
-    
 
-    var lightType  =  lightColor_transparent; 
 
-  int playTime = isLeft? 5: 6;
+
+showWaitPlayLeftRightAni( )async{
   
-
-  for (int i = 1 ; i<=  playTime ;i++){
-   
-    if(i %2 ==1){
-        lightType  =  lightColor_ani1;
-    }else{
-       lightType  =   lightColor_transparent; 
-    }
-    
-      for (int j in LeftRight_LeftItems  ){
-        ligthAniData[j]?.paint.color =lightType;
-        
-      }
-     // leftSideBtn.ChangeBGColor(lightType);
-
-    if (i % 2 == 1) {
-       lightType  = lightColor_transparent; 
-    }else{
-       lightType  =  lightColor_ani1;
-    }
-      for (int j in LeftRight_RightItems){
-        ligthAniData[j]?.paint.color = lightType; 
-        
-      }
-     //  rightSideBtn.ChangeBGColor(lightType);
-      await Future.delayed(Duration(milliseconds: LeftRight_Speed)); 
-       
-    } 
-
-   
-
-    
- 
-}
-showWaitPlayLeftRightAni()async{
-  
-    showLeftRight_LeftSige(true);
+   await showLeftRight_LeftSige(ligthAniData, true);
      
     var lightType  = lightColor_transparent; 
       for (int j in LeftRight_LeftItems){
@@ -395,31 +193,16 @@ WinInfo? createWinItem(isSpecialModel){
 
 
 
- startLeftRighGame(bool isLeft)async{
+ startLeftRighGame(bool isLeftWin)async{
   
   final   random = Random();
-  if(random.nextInt(100)%2 == 1){
-    //left win
-    showLeftRightGameAni(true,isLeft);
-  }else{
-    //right win
-    showLeftRightGameAni(false,!isLeft);
-  }
+  var isLeftSide = (random.nextInt(100)%2 == 1)?true:false;
+  await showLeftRight_LeftSige( ligthAniData,isLeftSide);
+   showWinCoin(isLeftSide?isLeftWin:!isLeftWin);
+    
   
 }
-showLeftRightGameAni(isLeft,isWin){
-  showLeftRight_LeftSige(isLeft);
-  if(isWin == true){
-    //獎勵翻倍
-    showWinCoin(true);
-  }else{
-    //獎勵歸零
-    showWinCoin(false);
-  }
-
-
-
-}
+ 
   @override
   FutureOr<void> onLoad() async {
     super.onLoad();
@@ -453,12 +236,15 @@ creditCoinTextSprite.editTextValue(creditCoin.toString());
 final tableGBInfos = await createSpriteInfos(bettingItemPath,tableBgImages );
 
 final tableBGspriteComponents = createTableBGSpriteComponent(tableGBInfos,Vector2(120, 200));
+for (final item in tableBGspriteComponents){
+  world.add(item);
+};
 
 
 // 添加背景动画系统
-    bgAnimationSystem = BackgroundAnimationSystem( tableBGspriteComponents);
+bgAnimationSystem = BackgroundAnimationSystem( tableBGspriteComponents);
      
-    add(bgAnimationSystem);
+add(bgAnimationSystem);//添加世界中才可以觸發onMount and update
 
 
 
@@ -470,6 +256,8 @@ startPosition =  playTableInfos.$2;
 playTableSpriteComponents.forEach((item)=> world.add(item)); 
 
 //燈號
+ligthData = createStartGameItem( playTableSpriteComponents);
+
 
 int indexValue = 0;
 for (SpriteComponent item in playTableSpriteComponents) {
@@ -514,12 +302,6 @@ ligthData.values.forEach((item){
 
 
 
-
-
-
-
-
-
 final bettingColorData = createBettingTextSprite(bettingTexts, startPosition,Vector2(120, 50));
  final  bettingColorComponents =   bettingColorData.$1;
 startPosition =  bettingColorData.$2;
@@ -557,8 +339,6 @@ leftSideBtn =  createControllButton(controllValues[3],controllValues[0], startPo
     startPosition.x +=  130;
   startBtn =   createControllButton(controllValues[5],controllValues[0], startPosition, Vector2(120, 120), startOnPressed);
 
-
-
   
   world.add(exchangeBtn);
  
@@ -575,263 +355,122 @@ leftSideBtn =  createControllButton(controllValues[3],controllValues[0], startPo
 
 }
 
- 
-
-List<SpriteComponent>  createTableBGSpriteComponent(List<Sprite> sprites, Vector2 pos)  {
-
- return sprites.map((sprite){
-    final spriteComponent =   SpriteComponent(sprite:sprite ,position:pos,scale: Vector2(1,1));
-
-    world.add(spriteComponent);
-    spriteComponent.setOpacity(0);
-    return spriteComponent;
-  }).toList();
+ void exchangeOnPressed() async{
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
+  print('exchangeOnPressed');
+  //win  to credit
+  if(bounsWinCoin > 0){
+    
+    winCoinTextSprite.editTextValueAni('0');
+     creditCoin += bounsWinCoin;
+   await creditCoinTextSprite.editTextValueAni(creditCoin.toString());
+   gameState = GameState.waitBit;
 
    
+  }
+}
+void winOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
+  print('winOnPressed');
+}
+void creditOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
+  print('creditOnPressed');
+}
+void leftSideOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
+  print('leftSideOnPressed');
+   startLeftRighGame(true);
+  
 }
 
-Future<void> lightAniRun(int startItemKey, int endItemKey ,void Function () nextStep) async {
+void rightSideOnPressed(){
+   if(gameState != GameState.waitDoubleGame){
+    return;
+  }
+  print('rightSideOnPressed');
+  startLeftRighGame(false);
+}
+void startOnPressed(){
+  if(gameState != GameState.waitStartGame){
+    return;
+  }
+  winInfos.clear();
+
+  gameState = GameState.startGame;
   
-    final firstSpeed = 80;
-    final secondSpeed = 100;
-    
-    final lastSpeed = 140;
-    final cancelSpeed = 50;
-    int j = 0;
-        
-    //run 2 
-    for (int i = startItemKey ; i<= 24 ;i++){
-      ligthAniData[i]?.paint.color = lightColor_ani1;
-      // 间隔时间
-       await Future.delayed(Duration(milliseconds: firstSpeed));
-       if(i > 1){
-          ligthAniData[i-1]?.paint.color = lightColor_ani2;
-          await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthAniData[i-1]?.paint.color = lightColor_transparent; 
-       }
-       
-       
-    } 
-     ligthAniData[24]?.paint.color = lightColor_transparent;
-    for (int i = 1 ; i<= 24 ;i++){
-      ligthAniData[i]?.paint.color = lightColor_ani1;
-      // 间隔时间
-       await Future.delayed(Duration(milliseconds: secondSpeed));
-       if(i > 1){
-          ligthAniData[i-1]?.paint.color = lightColor_ani2;
-          await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthAniData[i-1]?.paint.color = lightColor_transparent; 
-       }
-       
-       
-    }
-     ligthAniData[24]?.paint.color = lightColor_transparent;
-     
-    for (int i = 1 ; i<= endItemKey ;i++){
-      ligthAniData[i]?.paint.color = lightColor_ani1;
-      // 间隔时间
-       await Future.delayed(Duration(milliseconds: lastSpeed));
-       if(i > 1){
-          ligthAniData[i-1]?.paint.color = lightColor_ani2;
-          await Future.delayed(Duration(milliseconds: cancelSpeed));
-          ligthAniData[i-1]?.paint.color = lightColor_transparent; 
-       }
-       
-       
-    }
-    
-    ligthData[endItemKey]?.paint.color = lightColor_selected;
-    await Future.delayed(Duration(milliseconds: cancelSpeed));
-    ligthAniData[endItemKey]?.paint.color = lightColor_transparent;
-    print('finish lightAniRun');
+  WinInfo? winInfo = createWinItem(false);
+  if(winInfo == null){
+    //特殊模式
+     winInfo = createWinItem(true)!;
+      winInfos.add(winInfo);
+     lightAniRun(ligthData,ligthAniData,startIndex,winInfo.itemIndex, (){
+      startIndex = lastIndex;
+       specialModel();
+     });
+
+
+  }else if( winInfo.winItemId == LitttleMaryItemName.once_more.name){
     startIndex = lastIndex;
-    //執行下個動作
-
-     if(nextStep != null){
-      print('next Step');
-      nextStep();
-     }
-    
-     
-
+    winInfos.add(winInfo);
+    //once more
+    //執行動畫
+    lightAniRun(ligthData,ligthAniData,startIndex,winInfo.itemIndex,()async {
+      startIndex = lastIndex;
+      await onceMore(ligthAniData);
+      gameState = GameState.waitStartGame;
+    });
+  }else{
+    //正常模式
+    //執行動畫
+     winInfos.add(winInfo);
+    lightAniRun(ligthData,ligthAniData,startIndex,winInfo.itemIndex,(){
+      startIndex = lastIndex;
+      showWinCoin_First();
+    });
   }
-  
 
-HudCustomButton createControllButton(String title,String buttonId,Vector2 buttonPosition,Vector2 buttonSize,
-void Function() onButtonPressed){
-   final button = HudCustomButton(
-      onPressed: () {
-          onButtonPressed();
-      } ,
-      titleStr: title,
-      size: buttonSize,
-      position: buttonPosition, // 屏幕右上角，留出20像素的上边距
-    );
-
-  return button;
-  
 
 }
-
-(List<ColoredTapTextSprite>,Vector2) createBettingTapEditSprite(List<String> bettingStrInfos,Vector2 startPosition,
-bool Function(int newValue,String itemName) onTapCounterChanged){
-
-   
-
-double x1 = startPosition.x;
-   double y1 = startPosition.y;
-    Vector2 endPosition = Vector2(x1, y1);
-    double maxWidth = gameWidth-startPosition.x-startPosition.x;
-   int maxColumn = bettingStrInfos.length;
-   double widthValue = 120;
-   double scaleValue = (maxWidth/maxColumn)/widthValue; 
-
-  final coloredSprite =  bettingStrInfos.map((bettingTxt){ 
-
-  String bettingItemId = bettingTxt;
-
-  final sprite = ColoredTapTextSprite(itemId:bettingItemId, backgroundColor: Color.fromARGB(255, 148, 132, 171), 
-    colorSize: Vector2(widthValue*scaleValue ,widthValue*scaleValue),position: Vector2(x1, y1),
-    onCounterChanged: (newValue,itemId) {
-
-        print('$itemId 計數器值變更為: $newValue');
-        return onTapCounterChanged(newValue,itemId);
-      },
-    );
-  
-     
-    
-    x1 += widthValue * scaleValue;
-    return sprite;
-  }).toList();
-
-    endPosition.x = startPosition.x;
-    endPosition.y +=  widthValue * scaleValue;;
-    return (coloredSprite,endPosition);
-}
-
  
-(List<ColoredTextSprite>,Vector2) createBettingTextSprite(List<String> bettingStrInfos,Vector2 startPosition,Vector2 colorSize){
- 
-double x1 = startPosition.x;
-   double y1 = startPosition.y;
-    Vector2 endPosition = Vector2(x1, y1);
-    double maxWidth = gameWidth-startPosition.x-startPosition.x;
-   int maxColumn = bettingStrInfos.length;
-   double widthValue = colorSize.x;
-   double scaleValue = (maxWidth/maxColumn)/widthValue; 
-   
+showWinCoin_First()  {
+  startIndex = lastIndex;
+  showWinCoin(null);
 
-  final coloredSprite =  bettingStrInfos.map((bettingTxt){ 
-     
-    final sprite =  ColoredTextSprite(backgroundColor: const  Color(0xFF3366CC), 
-     text: bettingTxt,position: Vector2(x1, y1),colorSize:Vector2(colorSize.x * scaleValue, colorSize.y));
-    x1 += colorSize.x * scaleValue ;
-    return sprite;
-  }).toList();
-
-    endPosition.x = startPosition.x;
-    endPosition.y +=  colorSize.y;
-    return (coloredSprite,endPosition);
 }
 
 
-(List<SpriteComponent>,Vector2) createBettingPosition(List<Sprite> spriteInfos ,Vector2 startPosition){
-
-   double x1 = startPosition.x;
-   double y1 = startPosition.y;
-    Vector2 endPosition = Vector2(x1, y1);
-    double maxWidth = gameWidth-startPosition.x-startPosition.x;
-   int maxColumn = 8;
-   double widthValue = 120;
-   double scaleValue = (maxWidth/maxColumn)/widthValue; 
-  
-   int index = 0;
    
-    
-   
-   final spriteComponents = spriteInfos.map((spriteInfo){  
-     index ++; 
-      if(index > 1){
-           x1 +=  widthValue*scaleValue;
-        }
-     
-     
-      final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1, y1),scale: Vector2(scaleValue,scaleValue));
-    
-      return spriteComponent;
-    }).toList(); 
-    endPosition.x = startPosition.x;
-    endPosition.y +=  widthValue*scaleValue;
-    return (spriteComponents,endPosition);
-  }
+bool  editBetting(int betCoint,String betStr){
+    print('editBetting betStr: $betStr, betCoint:$betCoint  creditCoin: $creditCoin');
+    if((gameState != GameState.waitBit) && (gameState != GameState.waitStartGame)){
+      return false;
+    }
+    if(creditCoin == 0) return false;
+
+    creditCoin -= 1;
+     creditCoinTextSprite.editTextValue(creditCoin.toString());
+     betCoint++;
+     bettingInfo[betStr] = betCoint;
+     gameState = GameState.waitStartGame;
+    return true;
 
 
-(List<SpriteComponent>, Vector2) createPlayTablePosition(List<Sprite> spriteInfos ,Vector2 startPosition){
+   }
 
-   double x1 = startPosition.x;
-   double y1 = startPosition.y;
-    double widthValue = 120;
-   int row = 1;
-   double maxWidth = gameWidth-startPosition.x-startPosition.x;
-   bool isLeft = true;
-   int index = 0;
-   int maxColumn = 7;
-    double scaleValue = ((maxWidth)/maxColumn)/widthValue; 
-   Vector2 endPosition = Vector2(x1, y1);
-   
-   final spriteComponents =  spriteInfos.map((spriteInfo){  
-     
-      index ++;
-       if(index <= maxColumn   ){
-        row = 1;
-        if(index > 1){
-           x1 +=   widthValue*scaleValue;
-        }
-       
-        y1 = startPosition.y;
-       }else if(index <= (spriteInfos.length - maxColumn )){
-        if(isLeft == true){
-          row++;
-          isLeft = false;
-          x1 = startPosition.x;
-          y1 +=  widthValue*scaleValue;
-        }else{
-          isLeft = true;
-          x1 += ((widthValue*scaleValue * 6) as num).toDouble()  ;
-        }
-        
-       }else{
-        //last row 
-        if(index ==  (spriteInfos.length - maxColumn ) + 1){
-          row++;
-          x1 = startPosition.x;
-          y1 += widthValue*scaleValue;
-        
-        }else{
-           x1 += widthValue*scaleValue;
-
-        }
-       } 
-
-      endPosition.x = startPosition.x;
-      endPosition.y = y1 +  (widthValue*scaleValue);
-      
-     
-      final spriteComponent =   SpriteComponent(sprite:spriteInfo ,position: Vector2(x1, y1),scale: Vector2(scaleValue,scaleValue));
-
-      return spriteComponent;
-    }).toList(); 
-
-    return (spriteComponents,endPosition);
-  }
 
 
 Future< List<Sprite>> createSpriteInfos(String tablePath,List<String> tableNames) async{
 
-    
-   
-    List<String> tablePaths = tableNames.map((name) => '$tablePath$name.png').toList();
+  List<String> tablePaths = tableNames.map((name) => '$tablePath$name.png').toList();
 
   final imageInfos = await images.loadAll(tablePaths);
 
@@ -839,6 +478,5 @@ Future< List<Sprite>> createSpriteInfos(String tablePath,List<String> tableNames
     return Sprite(imageInfo,srcPosition:Vector2(0,0));
   }).toList();
   }
- 
   
 }
