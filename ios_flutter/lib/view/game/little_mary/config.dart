@@ -23,7 +23,7 @@ const tableNames = [
     ];
 const bettingItemPath = 'resource/images/little_mary/';
 const tableBgImages = [
-  'left_right_bg001','left_right_bg002','left_right_bg003',
+  'left_right_bg001','left_right_bg002','left_right_bg003','left_right_bg004',
 ];
 
 
