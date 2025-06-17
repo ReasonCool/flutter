@@ -14,6 +14,11 @@ import 'betting_tap.dart';
  import 'package:flame/palette.dart';
 import 'button_tap.dart';
 
+import 'tableBg.dart';
+
+ 
+
+
 enum GameState{
 
   waitBit(10),waitStartGame(20),startGame(25),waitDoubleGame(30),startDoubleGame(40);
@@ -64,6 +69,9 @@ late final leftSideBtn;
 late final rightSideBtn;
    
 late final  startBtn ;
+
+late BackgroundAnimationSystem bgAnimationSystem;
+
 
   double get width => size.x;
   double get height => size.y;
@@ -442,6 +450,19 @@ creditCoinTextSprite.editTextValue(creditCoin.toString());
 
 //加上燈號及小圖示  
 //小圖示  
+final tableGBInfos = await createSpriteInfos(bettingItemPath,tableBgImages );
+
+final tableBGspriteComponents = createTableBGSpriteComponent(tableGBInfos,Vector2(120, 200));
+
+
+// 添加背景动画系统
+    bgAnimationSystem = BackgroundAnimationSystem( tableBGspriteComponents);
+     
+    add(bgAnimationSystem);
+
+
+
+
 final spriteInfos = await createSpriteInfos(tablePath,tableNames );
 final playTableInfos =   createPlayTablePosition(spriteInfos,startPosition);
 final playTableSpriteComponents =   playTableInfos.$1;
@@ -550,15 +571,24 @@ leftSideBtn =  createControllButton(controllValues[3],controllValues[0], startPo
   world.add(rightSideBtn);
  
   world.add(startBtn);
-  
-  
-
-
-
     
 
 }
 
+ 
+
+List<SpriteComponent>  createTableBGSpriteComponent(List<Sprite> sprites, Vector2 pos)  {
+
+ return sprites.map((sprite){
+    final spriteComponent =   SpriteComponent(sprite:sprite ,position:pos,scale: Vector2(1,1));
+
+    world.add(spriteComponent);
+    spriteComponent.setOpacity(0);
+    return spriteComponent;
+  }).toList();
+
+   
+}
 
 Future<void> lightAniRun(int startItemKey, int endItemKey ,void Function () nextStep) async {
   
@@ -806,7 +836,7 @@ Future< List<Sprite>> createSpriteInfos(String tablePath,List<String> tableNames
   final imageInfos = await images.loadAll(tablePaths);
 
   return imageInfos.map((imageInfo){  
-    return Sprite(imageInfo,srcPosition:Vector2(0,0),srcSize: Vector2(  120 ,  120));
+    return Sprite(imageInfo,srcPosition:Vector2(0,0));
   }).toList();
   }
  

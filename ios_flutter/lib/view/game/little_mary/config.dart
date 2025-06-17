@@ -22,6 +22,10 @@ const tableNames = [
        'melon','melon_multiple_2','apple','seven','seven_multiple_2','bell','orange',
     ];
 const bettingItemPath = 'resource/images/little_mary/';
+const tableBgImages = [
+  'left_right_bg001','left_right_bg002','left_right_bg003',
+];
+
 
 enum LitttleMaryItemName   {
  orange,bell,bar50,bar,bar25,apple,melon,
