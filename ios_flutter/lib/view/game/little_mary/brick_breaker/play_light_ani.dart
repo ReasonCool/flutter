@@ -1,12 +1,12 @@
  
- import 'config.dart';
- import 'color_text_sprite.dart';
+ import '../config.dart';
+ import '../contain/color_text_sprite.dart';
 import 'package:flame/components.dart';
 import 'package:flame/palette.dart';
 
 
 
-showLeftRight_LeftSige(Map<int,RectangleComponent> ligthAniData ,bool isLeft)async {
+showLeftRight_LeftSide(Map<int,RectangleComponent> ligthAniData ,bool isLeft)async {
    //左右閃三次
     
 
@@ -88,41 +88,6 @@ showLeftRight_LeftSige(Map<int,RectangleComponent> ligthAniData ,bool isLeft)asy
   
 
 
-
-Map<int,RectangleComponent> createStartGameItem(List<SpriteComponent> startGameSpriteComponents){
- var itemLigth = Map<int,RectangleComponent>();
-int indexValue = 0;
-for (SpriteComponent item in startGameSpriteComponents) {
-
-  print('item.position item$item');
-  final itemId = tableItemKey[indexValue];
-  indexValue ++; 
-  print('item.position itemId $itemId ');
-  //SpriteComponent
-  Vector2 pos = item.position;
-  print('item.position $pos');
-
-  final rectang = RectangleComponent(
-      size: Vector2(120, 120),
-      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
-      position: pos,
-    );
-  itemLigth[itemId] = rectang;
-
-   final rectang1 = RectangleComponent(
-      size: Vector2(20, 20),
-      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
-      position: pos,
-    );
-  itemLigth[itemId] = rectang1;
-  
-
-};
-return itemLigth;
-
-}
-
-
 Future<void> lightAniRun(Map<int,RectangleComponent> ligthData ,Map<int,RectangleComponent> ligthAniData,int startItemKey, int endItemKey ,[void Function ()? nextStep]) async {
    
   await  lightAniRun_Basic(ligthData,ligthAniData,startItemKey,endItemKey);
@@ -131,12 +96,7 @@ Future<void> lightAniRun(Map<int,RectangleComponent> ligthData ,Map<int,Rectangl
       print('next Step');
       nextStep();
      }
-    
-     
-
   }
-
-
 
 Future<void> lightAniRun_Basic(Map<int,RectangleComponent> ligthData ,Map<int,RectangleComponent> ligthAniData,int startItemKey, int endItemKey ) async {
   //var ligthAniData = Map<int,RectangleComponent>();

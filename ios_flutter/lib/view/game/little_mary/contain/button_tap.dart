@@ -6,6 +6,7 @@ import 'package:flame/events.dart';
 class HudCustomButton extends PositionComponent with TapCallbacks {
   final void Function() onPressed;
   final String titleStr;
+  var buttonTapEnable = false;
   HudCustomButton({
     required this.onPressed,
     required this.titleStr,
@@ -18,9 +19,40 @@ class HudCustomButton extends PositionComponent with TapCallbacks {
       size: size ,
       paint: Paint()..color = Colors.blue,
     );
+
+  late final textComponent = TextComponent(
+      text: titleStr,
+      textRenderer: TextPaint(
+        style: const TextStyle(color: Colors.white, fontSize: 20),
+      ),
+      anchor: Anchor.center,
+      position: size / 2,
+    );
+
+  late final rectangComponent = RectangleComponent(
+      size: size * 0.8,
+      paint: Paint()..color = Colors.blueGrey,
+      position: Vector2(10, 10),
+    );
   
   ChangeBGColor (Color bgColor){
     bgComponent.paint.color = bgColor;
+  }
+  ChangeEnable(bool isEnable){
+    buttonTapEnable = isEnable;
+    if(isEnable == true){
+      bgComponent.paint.color = Colors.grey;
+      rectangComponent.paint.color =  Colors.white;
+      textComponent.textRenderer =  TextPaint(
+        style: const TextStyle(color: Colors.black, fontSize: 20),
+      );
+    }else{
+      bgComponent.paint.color = Colors.blue;
+      rectangComponent.paint.color =  Colors.blueGrey;
+      textComponent.textRenderer =  TextPaint(
+        style: const TextStyle(color: Colors.white, fontSize: 20),
+      ); 
+    }
   }
 
   @override
@@ -28,26 +60,18 @@ class HudCustomButton extends PositionComponent with TapCallbacks {
     super.onLoad();
     // 添加一个背景
     add(bgComponent);
-    add(RectangleComponent(
-      size: size * 0.8,
-      paint: Paint()..color = Colors.blueGrey,
-      position: Vector2(10, 10),
-    ));
+    add(rectangComponent);
     // 添加文字
-    add(TextComponent(
-      text: titleStr,
-      textRenderer: TextPaint(
-        style: const TextStyle(color: Colors.white, fontSize: 20),
-      ),
-      anchor: Anchor.center,
-      position: size / 2,
-    ));
+    add(textComponent );
   }
 
   @override
   void onTapDown(TapDownEvent event) {
     super.onTapDown(event);
-    onPressed();
+    if(buttonTapEnable == true){
+      onPressed();
+    }
+    
   }
 }
 

@@ -1,19 +1,55 @@
 import 'package:flame/components.dart';
  
-import 'config.dart';
+import '../config.dart';
 
-import 'color_text_sprite.dart';
+import '../contain/color_text_sprite.dart';
 
-import 'betting_tap.dart';
+import '../contain/betting_tap.dart';
 
 import 'package:flame/palette.dart';
 
-import 'button_tap.dart';
+import '../contain/button_tap.dart';
 
+
+
+
+
+Map<int,RectangleComponent> createStartGameItem(List<SpriteComponent> startGameSpriteComponents){
+ var itemLigth = Map<int,RectangleComponent>();
+int indexValue = 0;
+for (SpriteComponent item in startGameSpriteComponents) {
+
+  print('item.position item$item');
+  final itemId = tableItemKey[indexValue];
+  indexValue ++; 
+  print('item.position itemId $itemId ');
+  //SpriteComponent
+  Vector2 pos = item.position;
+  print('item.position $pos');
+
+  final rectang = RectangleComponent(
+      size: Vector2(120, 120),
+      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
+      position: pos,
+    );
+  itemLigth[itemId] = rectang;
+
+   final rectang1 = RectangleComponent(
+      size: Vector2(20, 20),
+      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
+      position: pos,
+    );
+  itemLigth[itemId] = rectang1;
+  
+
+};
+return itemLigth;
+
+}
 
  
 
-HudCustomButton createControllButton(String title,String buttonId,Vector2 buttonPosition,Vector2 buttonSize,
+HudCustomButton createControllButton(World world,String title,String buttonId,Vector2 buttonPosition,Vector2 buttonSize,
 void Function() onButtonPressed){
    final button = HudCustomButton(
       onPressed: () {
@@ -24,12 +60,12 @@ void Function() onButtonPressed){
       position: buttonPosition, // 屏幕右上角，留出20像素的上边距
     );
 
-  return button;
+    world.add(button);
+
+    return button;
   
 
 }
-
-
 
 
 List<SpriteComponent>  createTableBGSpriteComponent(List<Sprite> sprites, Vector2 pos)  {
