@@ -165,6 +165,7 @@ class BrickBreaker extends FlameGame {
   }
 
   startLeftRighGame(bool isLeftWin) async {
+     changeGameState(GameState.startDoubleGame);
     final random = Random();
     var isLeftSide = (random.nextInt(100) % 2 == 1) ? true : false;
     await showLeftRight_LeftSide(ligthAniData, isLeftSide);
@@ -411,6 +412,7 @@ class BrickBreaker extends FlameGame {
     if (gameState != GameState.waitDoubleGame) {
       return;
     }
+   
     print('leftSideOnPressed');
     startLeftRighGame(true);
   }
