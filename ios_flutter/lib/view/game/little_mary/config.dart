@@ -91,7 +91,7 @@ const List<ItemInfo>tableItemInfo = [
       ItemInfo(11,  'apple',  'apple',5),
       ItemInfo(20,  'star', 'star',30),
       ItemInfo(12, 'orange', 'orange_multiple_2',20),
-      ItemInfo(19,  'melon', 'melon',1),
+      ItemInfo(19,  'melon', 'melon',15),
       ItemInfo(18,  'melon', 'melon_multiple_2',30),
       ItemInfo(17,  'apple',  'apple',5),
       ItemInfo(16,'seven', 'seven',40),
