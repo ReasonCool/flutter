@@ -248,14 +248,15 @@ class BrickBreaker extends FlameGame {
       return;
     }
     print('winOnPressed');
-    //credit to bouns-wins
-    if( bounsWinCoin > 1){
-      bounsWinCoin -= 1;
+    //bouns-win to credit  
+    if(maxBounsWinCoin > bounsWinCoin  ){
+      bounsWinCoin += 1;
       winCoinTextSprite.editTextValueAni(bounsWinCoin.toString());
-      creditCoin +=1;
+      creditCoin -=1;
       await creditCoinTextSprite.editTextValueAni(creditCoin.toString());
       
     }
+    
   }
 
   void creditOnPressed() async {
@@ -263,12 +264,11 @@ class BrickBreaker extends FlameGame {
       return;
     }
     print('creditOnPressed');
-    //bouns-win to credit
-     //credit to bouns-wins
-    if(maxBounsWinCoin > bounsWinCoin  ){
-      bounsWinCoin += 1;
+    //credit to bouns-wins
+    if( bounsWinCoin > 1){
+      bounsWinCoin -= 1;
       winCoinTextSprite.editTextValueAni(bounsWinCoin.toString());
-      creditCoin -=1;
+      creditCoin +=1;
       await creditCoinTextSprite.editTextValueAni(creditCoin.toString());
       
     }
