@@ -38,7 +38,7 @@ class HudCustomButton extends PositionComponent with TapCallbacks {
   ChangeBGColor (Color bgColor){
     bgComponent.paint.color = bgColor;
   }
-  ChangeEnable(bool isEnable){
+  changeEnable(bool isEnable){
     buttonTapEnable = isEnable;
     if(isEnable == true){
       bgComponent.paint.color = Colors.grey;

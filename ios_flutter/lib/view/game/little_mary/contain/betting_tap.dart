@@ -1,7 +1,3 @@
-
-
-
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
@@ -14,11 +10,8 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
   int _counter;
   final TextStyle textStyle;
   final Vector2 colorSize;
-  final String itemId;
-
-  final bool Function(int newValue,String itemId)? onCounterChanged;
-  
-  late TextComponent textComponent;
+  final String itemId; 
+  var buttonTapEnable = false;
   
   // 移除 EffectController 成员变量
   ColoredTapTextSprite({
@@ -41,21 +34,47 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
         );
 
 
+
+
+  final bool Function(int newValue,String itemId)? onCounterChanged;
+  late final RectangleComponent rectangComponent;
+  late final TextComponent textComponent;
+
+
+
   editTextValue(String textStr){
     print('coloredTapTextSprite editTextValue  textStr : $textStr');
     _counter = int.tryParse(textStr)!;
     textComponent.text = _counter.toString();
   }    
 
+  changeEnable(isEnable){
+     buttonTapEnable = isEnable;
+    if(isEnable == true){
+       
+      rectangComponent.paint.color =  Colors.white;
+      textComponent.textRenderer =  TextPaint(
+        style: const TextStyle(color: Colors.black, fontSize: 50));
+        
+    }else{
+      
+      rectangComponent.paint.color =  Colors.blueGrey;
+      textComponent.textRenderer =  TextPaint(
+        style: const TextStyle(color: Colors.white, fontSize: 50),
+      ); 
+    }
+  }
+
+  
   @override
   Future<void> onLoad() async {
     super.onLoad();
-
-    // 添加背景矩形
-    add(RectangleComponent(
+    rectangComponent = RectangleComponent(
       size: size,
       paint: BasicPalette.transparent.paint()..color = backgroundColor,
-    ));
+    );
+    // 添加背景矩形
+    add(rectangComponent);
 
     // 添加文字组件
     textComponent = TextComponent(
@@ -106,7 +125,9 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
 
   @override
   void onTapDown(TapDownEvent event) {
-
+    if(buttonTapEnable == false){
+      return;
+    }
     if(_counter >= 20){
       return;
     }
@@ -118,18 +139,11 @@ class ColoredTapTextSprite extends PositionComponent with TapCallbacks {
     }
     // 增加计数器
     _counter++;
-    textComponent.text = _counter.toString();
-
-    
-
-   
+    textComponent.text = _counter.toString(); 
 
     // 标记事件已处理
     event.handled = true;
-  }
-
-  
-
+  } 
   // 获取当前计数器值
   int get counter => _counter;
 

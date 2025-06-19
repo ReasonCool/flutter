@@ -13,8 +13,35 @@ import '../contain/button_tap.dart';
 
 
 
+Map<int,RectangleComponent> createLightDataItem(List<SpriteComponent> startGameSpriteComponents ,World world){
+ var itemLigth = Map<int,RectangleComponent>();
+int indexValue = 0;
+for (SpriteComponent item in startGameSpriteComponents) {
 
-Map<int,RectangleComponent> createStartGameItem(List<SpriteComponent> startGameSpriteComponents){
+  print('item.position item$item');
+  final itemId = tableItemKey[indexValue];
+  indexValue ++; 
+  print('item.position itemId $itemId ');
+  //SpriteComponent
+  Vector2 pos = item.position;
+  print('item.position $pos');
+
+   
+   final rectang1 = RectangleComponent(
+      size: Vector2(20, 20),
+      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
+      position: pos,
+    );
+  itemLigth[itemId] = rectang1;
+  
+   world.add(rectang1);
+};
+return itemLigth;
+
+}
+
+
+Map<int,RectangleComponent> createLightAniDataItem(List<SpriteComponent> startGameSpriteComponents ,World world){
  var itemLigth = Map<int,RectangleComponent>();
 int indexValue = 0;
 for (SpriteComponent item in startGameSpriteComponents) {
@@ -32,22 +59,14 @@ for (SpriteComponent item in startGameSpriteComponents) {
       paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
       position: pos,
     );
-  itemLigth[itemId] = rectang;
-
-   final rectang1 = RectangleComponent(
-      size: Vector2(20, 20),
-      paint: BasicPalette.transparent.paint()..color = lightColor_transparent ,
-      position: pos,
-    );
-  itemLigth[itemId] = rectang1;
-  
+  itemLigth[itemId] = rectang; 
+   world.add(rectang);
 
 };
 return itemLigth;
 
 }
 
- 
 
 HudCustomButton createControllButton(World world,String title,String buttonId,Vector2 buttonPosition,Vector2 buttonSize,
 void Function() onButtonPressed){
