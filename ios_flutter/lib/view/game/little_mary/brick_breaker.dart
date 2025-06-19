@@ -129,9 +129,9 @@ class BrickBreaker extends FlameGame {
 
   WinInfo? createWinItem(isSpecialModel) {
     WinInfo? winInfo;
-    int rangeValue = isSpecialModel ? 24 : 25;
+     
 
-    var winIndex = Random().nextInt(isSpecialModel ? 24 : 25);
+    var winIndex =  getWinNumber(isSpecialModel);
     print('startOnPressed lastIndex : $lastIndex ');
 
     if (isSpecialModel == true) {
@@ -173,7 +173,8 @@ class BrickBreaker extends FlameGame {
   startLeftRighGame(bool isLeftWin) async {
      changeGameState(GameState.startDoubleGame);
     final random = Random();
-    var isLeftSide = (random.nextInt(100) % 2 == 1) ? true : false;
+    
+    var isLeftSide = (random.nextInt(100) % leftRightWinProbability == 1) ? isLeftWin : !isLeftWin;
     await showLeftRight_LeftSide(ligthAniData, isLeftSide);
     bool checkValue = isLeftSide ? isLeftWin : !isLeftWin;
     winCoinAni(showWinCoin(winInfos, bounsWinCoin, checkValue), checkValue);

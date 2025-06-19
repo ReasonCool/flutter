@@ -50,12 +50,15 @@ extension buttonState on GameState{
         var lightType = lightColor_transparent;
         for (int j in LeftRight_LeftItems) {
           lightAniData[j]?.paint.color = lightType;
+          lightData[j]?.paint.color = lightType;
         }
         for (int k in LeftRight_RightItems) {
           lightAniData[k]?.paint.color = lightType;
+          lightData[k]?.paint.color = lightType;
         }
       }   
       resetLightColor();
+      
 
   switch (this){
     case GameState.waitBit:

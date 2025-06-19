@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:ios_flutter/view/game/little_mary/item.dart';
 
 const LittleMary_CreditCoin_LocalKey = 'LittleMary_CreditCoin_LocalKey';
-
+const leftRightWinProbability = 6; //1/6
 const gameWidth = 820.0;
 const gameHeight = 1500.0;
 const itemWidth = gameWidth/7;
