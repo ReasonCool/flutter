@@ -1,9 +1,9 @@
-
+ 
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 
 import 'brick_breaker.dart';    
-
+import 'custom_banner_ad.dart';
 class LittleMaryMainView extends StatefulWidget{
   
   @override
@@ -24,7 +24,32 @@ late final BrickBreaker game;
   void initState() {
     super.initState();
     game = BrickBreaker();
+
+     // 延遲添加廣告以確保遊戲正確初始化
+    Future.delayed(const Duration(milliseconds: 500), () {
+      _addBannerToGame();
+    });
   }         
+
+ void _addBannerToGame() {
+    // 創建廣告組件
+    final banner = Positioned(
+      top:125,
+      left: 60,
+      child: Container(
+        alignment: Alignment.center,
+        child: const CustomBannerAd(
+          width: 270,
+          height: 220,
+        ),
+      ),
+    );
+    
+    // 將廣告組件傳遞給遊戲類並顯示
+    game.showBanner(banner);
+  }
+
+
 
   @override
   Widget build (BuildContext context){
@@ -43,7 +68,18 @@ late final BrickBreaker game;
      ),
      child:
      //Text("sdf")
-       GameWidget(game: game) 
+       GameWidget(game: game,
+       
+       // 註冊覆蓋層構建器
+        overlayBuilderMap: {
+          'banner': (BuildContext context, BrickBreaker game) {
+            return game.bannerOverlay ?? Container();
+          },}
+       
+       
+       
+       ) 
+       
        , )
 
         

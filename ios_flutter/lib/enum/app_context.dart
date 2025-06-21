@@ -44,12 +44,15 @@ import 'package:ios_flutter/view/sub_page/child_change_state_page.dart';
 import 'package:ios_flutter/view/sub_page/navi_transfor_data.dart';
 import 'package:ios_flutter/view/sub_page/navi_transfor_data_stateful.dart';
 import 'package:ios_flutter/view/sub_page/wrap_page.dart';
+import 'package:ios_flutter/view/sub_page/admob_banner.dart';
 
 /// 路由配置表
 /// ----------------------------
  
 enum AppRoutes {
   homeName('/HomeName'),
+ 
+  admobBanner('/AdmobBanner'), 
   littleMary('/LittleMary'),
   localDataPageName('/LocalDataPageName'),
   game1Name('/Game1Name'),
@@ -99,6 +102,7 @@ enum AppRoutes {
  //設定畫面路由名稱與路由對應
   static Map<String,WidgetBuilder> get routes =>{
   homeName.path: (_) => const HomePage(),
+  admobBanner.path: (_) => const AdmobBanner(),
   littleMary.path: (_) =>   LittleMaryMainView(),
   localDataPageName.path:(_) => const LocalDataPage(),
   game1Name.path:(_) => GameScreen(),
@@ -148,6 +152,7 @@ enum AppRoutes {
     //homeName.path: "首頁",arg
     //autoLoginName.path:{"title":"auto login Page "},
     localDataPageName.path:{'title':'本地資料'},
+    admobBanner.path : {'title':'橫幅廣告'},
     littleMary.path:{'title':'小馬莉'},
     game1Name.path:{"title":"Game 1"},
     emailRegistPageName.path:{'title':'Email 登錄 '},

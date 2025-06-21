@@ -12,7 +12,7 @@ import 'package:ios_flutter/model/loginInfo.dart';
 
  import 'package:ios_flutter/future/firebase_init.dart';
 
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 //檢測頁面狀態
 class MyNavigatorObserver extends NavigatorObserver {
@@ -43,11 +43,15 @@ class MyNavigatorObserver extends NavigatorObserver {
 
 
  
-void main() {
+void main() async {
 
-//firebaseInit();
+WidgetsFlutterBinding.ensureInitialized(); // 確保 Flutter 綁定
+  await MobileAds.instance.initialize();     // 初始化 AdMob SDK
  
-runApp(  MultiProvider( // 正确使用 MultiProvider
+runApp(  
+  //admob
+  //provider
+  MultiProvider( // 正确使用 MultiProvider
         providers: [
           ChangeNotifierProvider(create: (_) => LoginModel()),
           // 添加其他 Provider...
@@ -60,7 +64,10 @@ runApp(  MultiProvider( // 正确使用 MultiProvider
 
 
 }
-
+Future<InitializationStatus> _initGoogleMobileAds() {
+    // TODO: Initialize Google Mobile Ads SDK
+    return MobileAds.instance.initialize();
+  }
 // 动态路由生成器：路由名稱無對應資料會跑這個
   // Route<dynamic>? _generateRoute(RouteSettings settings) {
  
@@ -81,6 +88,10 @@ late Future <Map<String, dynamic>> _firebase_Init;
     // TODO: implement initState
     super.initState();
     _firebase_Init = firebaseInit();
+
+    //admob
+   _initGoogleMobileAds(); // This initializes the SDK
+    
   }
 
   @override

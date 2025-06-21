@@ -1,9 +1,10 @@
 import 'dart:async';
+import 'dart:io';
  
 import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
- 
+import 'package:flutter/material.dart';
 
 import 'components.dart';
 import 'config.dart';
@@ -23,7 +24,11 @@ import 'brick_breaker/game_state.dart';
 
 import 'brick_breaker/model.dart';
 
-class BrickBreaker extends FlameGame {
+
+ import 'custom_banner_ad.dart';
+
+ 
+class BrickBreaker extends FlameGame  {
   BrickBreaker()
     : super(
         camera: CameraComponent.withFixedResolution(
@@ -31,6 +36,23 @@ class BrickBreaker extends FlameGame {
           height: gameHeight,
         ),
       );
+
+ // 用於存儲廣告組件
+  Widget? bannerOverlay;
+
+  // 添加廣告覆蓋層
+  void showBanner(Widget banner) {
+    bannerOverlay = banner;
+    overlays.add('banner');
+  }
+
+  // 移除廣告
+  void hideBanner() {
+    overlays.remove('banner');
+    bannerOverlay = null;
+  }
+
+
   GameState gameState = GameState.waitBit;
   late final ColoredTextSprite creditCoinTextSprite;
   late final ColoredTextSprite winCoinTextSprite;
@@ -49,6 +71,8 @@ class BrickBreaker extends FlameGame {
   late final HudCustomButton startBtn;
 
   late BackgroundAnimationSystem bgAnimationSystem;
+
+ 
 
  
   late  LocalCreditCoin localStorage ;
@@ -181,7 +205,7 @@ class BrickBreaker extends FlameGame {
   }
 
    
-  
+ 
    
 
   @override
@@ -199,6 +223,9 @@ class BrickBreaker extends FlameGame {
 
   await createBGAni();
 
+ 
+ 
+
   await createBettingUI();
    
   createControllerUI();
@@ -206,7 +233,7 @@ class BrickBreaker extends FlameGame {
 
    
   }
-  
+   
  void changeGameState(GameState state){
 //控制按鈕
     gameState = state;
